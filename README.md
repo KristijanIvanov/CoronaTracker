@@ -1,1 +1,1 @@
-# CoronaTracker
+# CoronaStatsApp
