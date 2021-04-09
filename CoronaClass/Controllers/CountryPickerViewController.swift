@@ -21,8 +21,6 @@ class CountryPickerViewController: UIViewController {
         fetchCountries()
     }
     
-    
-    
     private func addNavigationView() {
         let navigationView = NavigationView(state: .backAndTitle, delegate: self, title: "Add Country")
         navigationHolderView.addSubview(navigationView)

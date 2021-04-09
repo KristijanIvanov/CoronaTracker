@@ -85,7 +85,7 @@ class NavigationView: UIView {
     
     private func setupGradient() {
         gradientLayer = CAGradientLayer()
-        gradientLayer?.colors = [UIColor(hex: "5AC7AA").cgColor, UIColor(hex: "9ADCB9").cgColor]
+        gradientLayer?.colors = [UIColor(hex: "9ADCB9").cgColor, UIColor(hex: "5AC7AA").cgColor]
         gradientLayer?.startPoint = CGPoint(x: 0 , y: 0.5)
         gradientLayer?.startPoint = CGPoint(x: 1 , y: 0.5)
         gradientLayer?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 124)
