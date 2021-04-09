@@ -20,9 +20,10 @@
 		91BE56FE261E1FF800FDAB54 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE56FD261E1FF800FDAB54 /* UIColor.swift */; };
 		91BE570B261E24B600FDAB54 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE570A261E24B600FDAB54 /* APIManager.swift */; };
 		91BE570E261E24E000FDAB54 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE570D261E24E000FDAB54 /* Country.swift */; };
-		CD2E9866261F8FC800D21281 /* CountryConfirmedCasesCollectionViewCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E9864261F8FC800D21281 /* CountryConfirmedCasesCollectionViewCellCollectionViewCell.swift */; };
-		CD2E9867261F8FC800D21281 /* CountryConfirmedCasesCollectionViewCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD2E9865261F8FC800D21281 /* CountryConfirmedCasesCollectionViewCellCollectionViewCell.xib */; };
+		CD2E9866261F8FC800D21281 /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E9864261F8FC800D21281 /* CountryCell.swift */; };
+		CD2E9867261F8FC800D21281 /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD2E9865261F8FC800D21281 /* CountryCell.xib */; };
 		CD2E986E261FA70600D21281 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E986D261FA70600D21281 /* DoubleExtension.swift */; };
+		D67E60B226204CFA00CC98F5 /* DashboardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67E60B126204CFA00CC98F5 /* DashboardHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,9 +40,10 @@
 		91BE56FD261E1FF800FDAB54 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		91BE570A261E24B600FDAB54 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		91BE570D261E24E000FDAB54 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
-		CD2E9864261F8FC800D21281 /* CountryConfirmedCasesCollectionViewCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryConfirmedCasesCollectionViewCellCollectionViewCell.swift; sourceTree = "<group>"; };
-		CD2E9865261F8FC800D21281 /* CountryConfirmedCasesCollectionViewCellCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryConfirmedCasesCollectionViewCellCollectionViewCell.xib; sourceTree = "<group>"; };
+		CD2E9864261F8FC800D21281 /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
+		CD2E9865261F8FC800D21281 /* CountryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
 		CD2E986D261FA70600D21281 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		D67E60B126204CFA00CC98F5 /* DashboardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		91BE56D5261E121C00FDAB54 /* CoronaClass */ = {
 			isa = PBXGroup;
 			children = (
+				91BE5702261E23B400FDAB54 /* Controllers */,
 				91BE5708261E23F900FDAB54 /* Views */,
 				91BE5707261E23E000FDAB54 /* Extensions */,
 				91BE5705261E23CA00FDAB54 /* API */,
@@ -85,8 +88,6 @@
 				91BE56DF261E121C00FDAB54 /* Assets.xcassets */,
 				91BE56E1261E121C00FDAB54 /* LaunchScreen.storyboard */,
 				91BE56E4261E121C00FDAB54 /* Info.plist */,
-				91BE5702261E23B400FDAB54 /* Controllers */,
-				CD2E9861261F8EBC00D21281 /* CollectionViewCells */,
 			);
 			path = CoronaClass;
 			sourceTree = "<group>";
@@ -129,7 +130,9 @@
 		91BE5708261E23F900FDAB54 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CD2E9861261F8EBC00D21281 /* CollectionViewCells */,
 				91BE56FA261E168300FDAB54 /* NavigationView.swift */,
+				D67E60B126204CFA00CC98F5 /* DashboardHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -137,8 +140,8 @@
 		CD2E9861261F8EBC00D21281 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				CD2E9864261F8FC800D21281 /* CountryConfirmedCasesCollectionViewCellCollectionViewCell.swift */,
-				CD2E9865261F8FC800D21281 /* CountryConfirmedCasesCollectionViewCellCollectionViewCell.xib */,
+				CD2E9864261F8FC800D21281 /* CountryCell.swift */,
+				CD2E9865261F8FC800D21281 /* CountryCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -210,7 +213,7 @@
 			files = (
 				91BE56E3261E121C00FDAB54 /* LaunchScreen.storyboard in Resources */,
 				91BE56E0261E121C00FDAB54 /* Assets.xcassets in Resources */,
-				CD2E9867261F8FC800D21281 /* CountryConfirmedCasesCollectionViewCellCollectionViewCell.xib in Resources */,
+				CD2E9867261F8FC800D21281 /* CountryCell.xib in Resources */,
 				91BE56DE261E121C00FDAB54 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,13 +228,14 @@
 				CD2E986E261FA70600D21281 /* DoubleExtension.swift in Sources */,
 				91BE56D7261E121C00FDAB54 /* AppDelegate.swift in Sources */,
 				91BE56FE261E1FF800FDAB54 /* UIColor.swift in Sources */,
+				D67E60B226204CFA00CC98F5 /* DashboardHeaderView.swift in Sources */,
 				91BE56D9261E121C00FDAB54 /* SceneDelegate.swift in Sources */,
 				91BE56FB261E168300FDAB54 /* NavigationView.swift in Sources */,
 				91BE570E261E24E000FDAB54 /* Country.swift in Sources */,
 				91BE56F1261E134C00FDAB54 /* HomeViewController.swift in Sources */,
 				91BE56F4261E14C200FDAB54 /* CountryPickerViewController.swift in Sources */,
 				91BE570B261E24B600FDAB54 /* APIManager.swift in Sources */,
-				CD2E9866261F8FC800D21281 /* CountryConfirmedCasesCollectionViewCellCollectionViewCell.swift in Sources */,
+				CD2E9866261F8FC800D21281 /* CountryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

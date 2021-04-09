@@ -9,17 +9,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CountryConfirmedCasesCollectionViewCellCollectionViewCell" customModule="CoronaClass" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CountryCell" id="gTV-IL-0wX" customClass="CountryCell" customModule="CoronaClass" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="165" height="72"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="165" height="72"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1Q-gY-Nf1">
-                        <rect key="frame" x="15" y="12" width="65" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1Q-gY-Nf1">
+                        <rect key="frame" x="15" y="12" width="45.5" height="17"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="65" id="0U6-Gx-pyI"/>
                             <constraint firstAttribute="height" constant="17" id="5tL-Mc-Fqj"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -33,11 +32,10 @@
                             <constraint firstAttribute="width" constant="12" id="puq-PT-UQt"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9m-0i-zMr">
-                        <rect key="frame" x="15" y="30" width="60" height="35"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9m-0i-zMr">
+                        <rect key="frame" x="15" y="30" width="130" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="fTS-Zh-cvH"/>
-                            <constraint firstAttribute="width" constant="60" id="kgG-fw-4yD"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                         <nil key="textColor"/>
@@ -46,10 +44,13 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="0BL-C9-MG9" secondAttribute="trailing" constant="8" id="2vm-C1-zNx"/>
+                <constraint firstItem="0BL-C9-MG9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="q1Q-gY-Nf1" secondAttribute="trailing" constant="20" id="5QS-O0-NM8"/>
                 <constraint firstAttribute="bottom" secondItem="U9m-0i-zMr" secondAttribute="bottom" constant="7" id="DAt-SJ-aVd"/>
                 <constraint firstItem="U9m-0i-zMr" firstAttribute="top" secondItem="q1Q-gY-Nf1" secondAttribute="bottom" constant="1" id="Jc4-JW-NME"/>
+                <constraint firstAttribute="trailing" secondItem="U9m-0i-zMr" secondAttribute="trailing" constant="20" id="LO9-v5-F3i"/>
                 <constraint firstItem="q1Q-gY-Nf1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="Sml-i6-ZmQ"/>
                 <constraint firstItem="U9m-0i-zMr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="ZDQ-cd-Cfb"/>
                 <constraint firstItem="q1Q-gY-Nf1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="12" id="gjd-18-fqB"/>
