@@ -62,8 +62,7 @@ class HomeViewController: UIViewController, DisplayHudProtocol {
         fetchGlobalData()
         reloadInputViews()
     }
-    
-    //This is the check
+ 
     
     //MARK: - IBActions
     @IBAction func btnAddCountry(_ sender: UIButton) {
