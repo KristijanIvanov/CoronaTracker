@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import JGProgressHUD
 
 struct GlobalData {
     var totalRecovered: Double? = 1000
@@ -36,8 +37,8 @@ enum CollectionData: Equatable {
     }
 }
 
-class HomeViewController: UIViewController {
-    
+class HomeViewController: UIViewController, DisplayHudProtocol {
+
     //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var navigationHolderView: UIView!
@@ -50,14 +51,16 @@ class HomeViewController: UIViewController {
     //MARK: - Variables
     var collectionData: [CollectionData] = [.countries([])]
     var global = GlobalData()
-    
+    var hud: JGProgressHUD?
+
     //MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         addNavigationView()
         configureCollectionView()
         appendCountries()
-        configureGlobalViewData()
+        fetchGlobalData()
+        reloadInputViews()
     }
     
     //MARK: - IBActions
@@ -75,19 +78,28 @@ extension HomeViewController {
         let germany = MockCountry(name: "Spain", totalConfirmed: 40000)
         collectionData.removeAll()
         collectionData.append(.countries([macedonia, spain, italy, germany]))
-        collectionView.reloadData()
+    }
+    
+    func fetchGlobalData() {
+        displayHud(true)
+        APIManager.shared.getGlobalData { [weak self] (data, error) in
+            self?.displayHud(false)
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            if let data = data {
+                guard let totalConfirmed = data.global.totalConfirmed, let totalDeaths = data.global.totalDeaths, let totalRecovered = data.global.totalRecovered  else {return}
+                self?.lblTotalConfirmedNumber.text = "\(totalConfirmed.withCommas())"
+                self?.lblTotalDeathsNumber.text = "\(totalDeaths.withCommas())"
+                self?.lblTotalRecoveredNumber.text = "\(totalRecovered.withCommas())"
+            }
+        }
     }
 }
 
 //MARK: - UI config
 extension HomeViewController {
-    private func configureGlobalViewData() {
-        guard let confirmed = global.totalConfirmed, let deaths = global.totalDeaths, let recovered = global.totalRecovered else {return}
-        lblTotalConfirmedNumber.text = "\(confirmed.withCommas())"
-        lblTotalDeathsNumber.text = "\(deaths.withCommas())"
-        lblTotalRecoveredNumber.text = "\(recovered.withCommas())"
-    }
-    
     private func addNavigationView() {
         let navigationView = NavigationView(state: .onlyTitle, delegate: nil, title: "Dashboard")
         navigationHolderView.addSubview(navigationView)
@@ -108,11 +120,11 @@ extension HomeViewController {
         let numberOfItemsInRow: CGFloat = 2
         let minimumSpacing: CGFloat = 13
         let customContentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        
+
         guard let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
         let edgeInsetPadding = customContentInset.left + customContentInset.right
-        let width = (collectionView.bounds.size.width - (numberOfItemsInRow - 1) * minimumSpacing - edgeInsetPadding) / numberOfItemsInRow
-        
+        let width = (UIScreen.main.bounds.size.width - (numberOfItemsInRow - 1) * minimumSpacing - edgeInsetPadding) / numberOfItemsInRow
+
         layout.minimumLineSpacing = minimumSpacing
         layout.minimumInteritemSpacing = minimumSpacing
         layout.itemSize = CGSize(width: width, height: 72)

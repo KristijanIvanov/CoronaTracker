@@ -12,17 +12,24 @@
 		91BE56DE261E121C00FDAB54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91BE56DC261E121C00FDAB54 /* Main.storyboard */; };
 		91BE56E0261E121C00FDAB54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91BE56DF261E121C00FDAB54 /* Assets.xcassets */; };
 		91BE56E3261E121C00FDAB54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91BE56E1261E121C00FDAB54 /* LaunchScreen.storyboard */; };
-		91BE56ED261E12BE00FDAB54 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 91BE56EC261E12BE00FDAB54 /* Alamofire */; };
 		91BE56F1261E134C00FDAB54 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE56F0261E134C00FDAB54 /* HomeViewController.swift */; };
 		91BE56F4261E14C200FDAB54 /* CountryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE56F3261E14C200FDAB54 /* CountryPickerViewController.swift */; };
-		91BE56F8261E166C00FDAB54 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 91BE56F7261E166C00FDAB54 /* SnapKit */; };
 		91BE56FB261E168300FDAB54 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE56FA261E168300FDAB54 /* NavigationView.swift */; };
-		91BE56FE261E1FF800FDAB54 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE56FD261E1FF800FDAB54 /* UIColor.swift */; };
+		91BE56FE261E1FF800FDAB54 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE56FD261E1FF800FDAB54 /* UIColor+hex.swift */; };
 		91BE570B261E24B600FDAB54 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE570A261E24B600FDAB54 /* APIManager.swift */; };
 		91BE570E261E24E000FDAB54 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE570D261E24E000FDAB54 /* Country.swift */; };
 		CD2E9866261F8FC800D21281 /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E9864261F8FC800D21281 /* CountryCell.swift */; };
 		CD2E9867261F8FC800D21281 /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD2E9865261F8FC800D21281 /* CountryCell.xib */; };
-		CD2E986E261FA70600D21281 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E986D261FA70600D21281 /* DoubleExtension.swift */; };
+		CD2E986E261FA70600D21281 /* Double+Comma.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E986D261FA70600D21281 /* Double+Comma.swift */; };
+		CD2E98742621CE2500D21281 /* CountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E98732621CE2500D21281 /* CountryTableViewCell.swift */; };
+		CD2E987D2621CF3F00D21281 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CD2E987C2621CF3F00D21281 /* SnapKit */; };
+		CD2E98812621CFBC00D21281 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CD2E98802621CFBC00D21281 /* Alamofire */; };
+		CD2E98842621D85600D21281 /* UITableViewCell+ReuseIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E98832621D85600D21281 /* UITableViewCell+ReuseIdentifier.swift */; };
+		CD2E988826221C5200D21281 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CD2E988726221C5200D21281 /* JGProgressHUD */; };
+		CD2E988C26221CCD00D21281 /* DisplayHudProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E988B26221CCD00D21281 /* DisplayHudProtocol.swift */; };
+		CD2E98902622498800D21281 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E988F2622498800D21281 /* Global.swift */; };
+		CD2E989A2623695A00D21281 /* ManageCountriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2E98992623695A00D21281 /* ManageCountriesView.swift */; };
+		D64C3CFC2624852200C4E58A /* CustomSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64C3CFB2624852200C4E58A /* CustomSegmentControl.swift */; };
 		D67E60B226204CFA00CC98F5 /* DashboardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67E60B126204CFA00CC98F5 /* DashboardHeaderView.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,12 +44,18 @@
 		91BE56F0261E134C00FDAB54 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		91BE56F3261E14C200FDAB54 /* CountryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryPickerViewController.swift; sourceTree = "<group>"; };
 		91BE56FA261E168300FDAB54 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
-		91BE56FD261E1FF800FDAB54 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		91BE56FD261E1FF800FDAB54 /* UIColor+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		91BE570A261E24B600FDAB54 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		91BE570D261E24E000FDAB54 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		CD2E9864261F8FC800D21281 /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		CD2E9865261F8FC800D21281 /* CountryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
-		CD2E986D261FA70600D21281 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		CD2E986D261FA70600D21281 /* Double+Comma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Comma.swift"; sourceTree = "<group>"; };
+		CD2E98732621CE2500D21281 /* CountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewCell.swift; sourceTree = "<group>"; };
+		CD2E98832621D85600D21281 /* UITableViewCell+ReuseIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+ReuseIdentifier.swift"; sourceTree = "<group>"; };
+		CD2E988B26221CCD00D21281 /* DisplayHudProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayHudProtocol.swift; sourceTree = "<group>"; };
+		CD2E988F2622498800D21281 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		CD2E98992623695A00D21281 /* ManageCountriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCountriesView.swift; sourceTree = "<group>"; };
+		D64C3CFB2624852200C4E58A /* CustomSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentControl.swift; sourceTree = "<group>"; };
 		D67E60B126204CFA00CC98F5 /* DashboardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,8 +64,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91BE56ED261E12BE00FDAB54 /* Alamofire in Frameworks */,
-				91BE56F8261E166C00FDAB54 /* SnapKit in Frameworks */,
+				CD2E987D2621CF3F00D21281 /* SnapKit in Frameworks */,
+				CD2E988826221C5200D21281 /* JGProgressHUD in Frameworks */,
+				CD2E98812621CFBC00D21281 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,10 +92,12 @@
 		91BE56D5261E121C00FDAB54 /* CoronaClass */ = {
 			isa = PBXGroup;
 			children = (
-				91BE5702261E23B400FDAB54 /* Controllers */,
-				91BE5708261E23F900FDAB54 /* Views */,
+				91BE5706261E23D400FDAB54 /* Model */,
+				91BE5708261E23F900FDAB54 /* View */,
+				91BE5702261E23B400FDAB54 /* Controller */,
+				91BE5705261E23CA00FDAB54 /* APIManager */,
 				91BE5707261E23E000FDAB54 /* Extensions */,
-				91BE5705261E23CA00FDAB54 /* API */,
+				CD2E988A26221CBC00D21281 /* Protocols */,
 				91BE56D6261E121C00FDAB54 /* AppDelegate.swift */,
 				91BE56D8261E121C00FDAB54 /* SceneDelegate.swift */,
 				91BE56DC261E121C00FDAB54 /* Main.storyboard */,
@@ -92,49 +108,51 @@
 			path = CoronaClass;
 			sourceTree = "<group>";
 		};
-		91BE5702261E23B400FDAB54 /* Controllers */ = {
+		91BE5702261E23B400FDAB54 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				91BE56F0261E134C00FDAB54 /* HomeViewController.swift */,
 				91BE56F3261E14C200FDAB54 /* CountryPickerViewController.swift */,
 			);
-			path = Controllers;
+			path = Controller;
 			sourceTree = "<group>";
 		};
-		91BE5705261E23CA00FDAB54 /* API */ = {
+		91BE5705261E23CA00FDAB54 /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
-				91BE5706261E23D400FDAB54 /* Models */,
 				91BE570A261E24B600FDAB54 /* APIManager.swift */,
 			);
-			path = API;
+			path = APIManager;
 			sourceTree = "<group>";
 		};
-		91BE5706261E23D400FDAB54 /* Models */ = {
+		91BE5706261E23D400FDAB54 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				91BE570D261E24E000FDAB54 /* Country.swift */,
+				CD2E988F2622498800D21281 /* Global.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		91BE5707261E23E000FDAB54 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				91BE56FD261E1FF800FDAB54 /* UIColor.swift */,
-				CD2E986D261FA70600D21281 /* DoubleExtension.swift */,
+				91BE56FD261E1FF800FDAB54 /* UIColor+hex.swift */,
+				CD2E986D261FA70600D21281 /* Double+Comma.swift */,
+				CD2E98832621D85600D21281 /* UITableViewCell+ReuseIdentifier.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		91BE5708261E23F900FDAB54 /* Views */ = {
+		91BE5708261E23F900FDAB54 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D64C3CF42624792300C4E58A /* ControlSegmentButton */,
+				CD2E98762621CE2B00D21281 /* TableViewCells */,
 				CD2E9861261F8EBC00D21281 /* CollectionViewCells */,
-				91BE56FA261E168300FDAB54 /* NavigationView.swift */,
-				D67E60B126204CFA00CC98F5 /* DashboardHeaderView.swift */,
+				CD2E989C2624240600D21281 /* UIViews */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
 		CD2E9861261F8EBC00D21281 /* CollectionViewCells */ = {
@@ -144,6 +162,40 @@
 				CD2E9865261F8FC800D21281 /* CountryCell.xib */,
 			);
 			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		CD2E98762621CE2B00D21281 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				CD2E98732621CE2500D21281 /* CountryTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		CD2E988A26221CBC00D21281 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CD2E988B26221CCD00D21281 /* DisplayHudProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CD2E989C2624240600D21281 /* UIViews */ = {
+			isa = PBXGroup;
+			children = (
+				91BE56FA261E168300FDAB54 /* NavigationView.swift */,
+				D67E60B126204CFA00CC98F5 /* DashboardHeaderView.swift */,
+				CD2E98992623695A00D21281 /* ManageCountriesView.swift */,
+			);
+			path = UIViews;
+			sourceTree = "<group>";
+		};
+		D64C3CF42624792300C4E58A /* ControlSegmentButton */ = {
+			isa = PBXGroup;
+			children = (
+				D64C3CFB2624852200C4E58A /* CustomSegmentControl.swift */,
+			);
+			path = ControlSegmentButton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,8 +215,9 @@
 			);
 			name = CoronaClass;
 			packageProductDependencies = (
-				91BE56EC261E12BE00FDAB54 /* Alamofire */,
-				91BE56F7261E166C00FDAB54 /* SnapKit */,
+				CD2E987C2621CF3F00D21281 /* SnapKit */,
+				CD2E98802621CFBC00D21281 /* Alamofire */,
+				CD2E988726221C5200D21281 /* JGProgressHUD */,
 			);
 			productName = CoronaClass;
 			productReference = 91BE56D3261E121C00FDAB54 /* CoronaClass.app */;
@@ -194,8 +247,9 @@
 			);
 			mainGroup = 91BE56CA261E121C00FDAB54;
 			packageReferences = (
-				91BE56EB261E12BE00FDAB54 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				91BE56F6261E166C00FDAB54 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				CD2E987B2621CF3F00D21281 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				CD2E987F2621CFBC00D21281 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				CD2E988626221C5200D21281 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 			);
 			productRefGroup = 91BE56D4261E121C00FDAB54 /* Products */;
 			projectDirPath = "";
@@ -225,13 +279,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD2E986E261FA70600D21281 /* DoubleExtension.swift in Sources */,
+				CD2E98742621CE2500D21281 /* CountryTableViewCell.swift in Sources */,
+				CD2E986E261FA70600D21281 /* Double+Comma.swift in Sources */,
 				91BE56D7261E121C00FDAB54 /* AppDelegate.swift in Sources */,
-				91BE56FE261E1FF800FDAB54 /* UIColor.swift in Sources */,
+				91BE56FE261E1FF800FDAB54 /* UIColor+hex.swift in Sources */,
+				D64C3CFC2624852200C4E58A /* CustomSegmentControl.swift in Sources */,
 				D67E60B226204CFA00CC98F5 /* DashboardHeaderView.swift in Sources */,
 				91BE56D9261E121C00FDAB54 /* SceneDelegate.swift in Sources */,
+				CD2E988C26221CCD00D21281 /* DisplayHudProtocol.swift in Sources */,
 				91BE56FB261E168300FDAB54 /* NavigationView.swift in Sources */,
+				CD2E989A2623695A00D21281 /* ManageCountriesView.swift in Sources */,
+				CD2E98902622498800D21281 /* Global.swift in Sources */,
 				91BE570E261E24E000FDAB54 /* Country.swift in Sources */,
+				CD2E98842621D85600D21281 /* UITableViewCell+ReuseIdentifier.swift in Sources */,
 				91BE56F1261E134C00FDAB54 /* HomeViewController.swift in Sources */,
 				91BE56F4261E14C200FDAB54 /* CountryPickerViewController.swift in Sources */,
 				91BE570B261E24B600FDAB54 /* APIManager.swift in Sources */,
@@ -441,15 +501,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		91BE56EB261E12BE00FDAB54 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.2;
-			};
-		};
-		91BE56F6261E166C00FDAB54 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		CD2E987B2621CF3F00D21281 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -457,18 +509,39 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		CD2E987F2621CFBC00D21281 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.2;
+			};
+		};
+		CD2E988626221C5200D21281 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		91BE56EC261E12BE00FDAB54 /* Alamofire */ = {
+		CD2E987C2621CF3F00D21281 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 91BE56EB261E12BE00FDAB54 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = CD2E987B2621CF3F00D21281 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		CD2E98802621CFBC00D21281 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD2E987F2621CFBC00D21281 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		91BE56F7261E166C00FDAB54 /* SnapKit */ = {
+		CD2E988726221C5200D21281 /* JGProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 91BE56F6261E166C00FDAB54 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
+			package = CD2E988626221C5200D21281 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

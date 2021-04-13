@@ -67,6 +67,7 @@ class NavigationView: UIView {
         case .backAndTitle:
             addSubview(btnBack)
             addSubview(lblTitle)
+            
             btnBack.snp.makeConstraints { make in
                 make.leading.equalToSuperview().offset(13)
                 make.top.equalToSuperview().inset(59)

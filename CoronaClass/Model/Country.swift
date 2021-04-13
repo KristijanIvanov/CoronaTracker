@@ -18,3 +18,17 @@ struct Country: Codable {
         case isoCode = "ISO2"
     }
 }
+
+extension Country {
+    var isSelected: Bool {
+        return UserDefaults.standard.bool(forKey: isoCode)
+    }
+    
+    func save() {
+        UserDefaults.standard.set(true, forKey: isoCode)
+    }
+    
+    func delete() {
+        UserDefaults.standard.set(nil, forKey: isoCode)
+    }
+}
