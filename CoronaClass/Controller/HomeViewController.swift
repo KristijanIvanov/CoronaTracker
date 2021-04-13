@@ -63,6 +63,8 @@ class HomeViewController: UIViewController, DisplayHudProtocol {
         reloadInputViews()
     }
     
+    //This is the check
+    
     //MARK: - IBActions
     @IBAction func btnAddCountry(_ sender: UIButton) {
         performSegue(withIdentifier: "countriesSegue", sender: nil)
