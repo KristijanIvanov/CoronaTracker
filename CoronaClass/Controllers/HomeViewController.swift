@@ -7,87 +7,42 @@
 
 import UIKit
 import SnapKit
+import JGProgressHUD
 
-struct GlobalData {
-    var totalRecovered: Double? = 1000
-    var totalDeaths: Double? = 300
-    
-    var totalConfirmed: Double? {
-        guard let totalRecovered = totalRecovered, let totalDeaths = totalDeaths else {
-            return nil
-        }
-        return totalRecovered + totalDeaths
-    }
-}
-
-struct MockCountry {
-    var name = "Macedonia"
-    var totalConfirmed = 1000
-}
-
-enum CollectionData: Equatable {
-    case countries([MockCountry])
-    
-    static func == (lhs: CollectionData, rhs: CollectionData) -> Bool {
-        switch  (lhs, rhs) {
-        case (.countries(_), .countries(_)):
-            return true
-        }
-    }
-}
-
-class HomeViewController: UIViewController {
-    
-    //MARK: - IBOutlets
-    @IBOutlet weak var collectionView: UICollectionView!
+class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
+    //MARK: - UI navigation elements
     @IBOutlet weak var navigationHolderView: UIView!
+    @IBOutlet weak var globalHolderView: UIView!
+    @IBOutlet weak var confirmed: UILabel!
+    @IBOutlet weak var deaths: UILabel!
+    @IBOutlet weak var recovered: UILabel!
+    @IBOutlet weak var buttonRetry: UIButton!
+    @IBOutlet weak var lblConfirmedInfo: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var addCountry: UIButton!
-    @IBOutlet weak var globalStatisticHolderView: UIView!
-    @IBOutlet weak var lblTotalConfirmedNumber: UILabel!
-    @IBOutlet weak var lblTotalDeathsNumber: UILabel!
-    @IBOutlet weak var lblTotalRecoveredNumber: UILabel!
     
     //MARK: - Variables
-    var collectionData: [CollectionData] = [.countries([])]
-    var global = GlobalData()
+    private var selectedCountries = [Country]()
+    private(set) var allCountries = [Country]()
+    private let api = WebServices()
+    
+    var hud: JGProgressHUD?
     
     //MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         addNavigationView()
-        configureCollectionView()
-        appendCountries()
-        configureGlobalViewData()
+        setupGlobalHolder()
+        getGlobalData()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = CGSize(width: 165, height: 70)
+        }
+        fetchCountries()
     }
     
-    //MARK: - IBActions
-    @IBAction func btnAddCountry(_ sender: UIButton) {
-        performSegue(withIdentifier: "countriesSegue", sender: nil)
-    }
-}
-
-//MARK: - Data manager/Network
-extension HomeViewController {
-    func appendCountries() {
-        let macedonia = MockCountry(name: "Macedonia", totalConfirmed: 10000)
-        let spain = MockCountry(name: "Spain", totalConfirmed: 23000)
-        let italy = MockCountry(name: "Italy", totalConfirmed: 30000)
-        let germany = MockCountry(name: "Spain", totalConfirmed: 40000)
-        collectionData.removeAll()
-        collectionData.append(.countries([macedonia, spain, italy, germany]))
-        collectionView.reloadData()
-    }
-}
-
-//MARK: - UI config
-extension HomeViewController {
-    private func configureGlobalViewData() {
-        guard let confirmed = global.totalConfirmed, let deaths = global.totalDeaths, let recovered = global.totalRecovered else {return}
-        lblTotalConfirmedNumber.text = "\(confirmed.withCommas())"
-        lblTotalDeathsNumber.text = "\(deaths.withCommas())"
-        lblTotalRecoveredNumber.text = "\(recovered.withCommas())"
-    }
-    
+    //MARK: - UI elements setup
     private func addNavigationView() {
         let navigationView = NavigationView(state: .onlyTitle, delegate: nil, title: "Dashboard")
         navigationHolderView.addSubview(navigationView)
@@ -96,65 +51,140 @@ extension HomeViewController {
         }
     }
     
-    private func configureCollectionView() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(UINib(nibName: "CountryCell", bundle: nil), forCellWithReuseIdentifier: "CountryCell")
-        collectionView.register(DashboardHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: DashboardHeaderView.self))
-        configureFlowLayout()
+    private func setupGlobalHolder() {
+        globalHolderView.layer.cornerRadius = 8
+        globalHolderView.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        globalHolderView.layer.shadowOpacity = 1.0
+        globalHolderView.layer.shadowRadius = 10
+        globalHolderView.layer.shadowOffset = CGSize(width: 0, height: 2)
     }
     
-    private func configureFlowLayout() {
-        let numberOfItemsInRow: CGFloat = 2
-        let minimumSpacing: CGFloat = 13
-        let customContentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        
-        guard let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-        let edgeInsetPadding = customContentInset.left + customContentInset.right
-        let width = (collectionView.bounds.size.width - (numberOfItemsInRow - 1) * minimumSpacing - edgeInsetPadding) / numberOfItemsInRow
-        
-        layout.minimumLineSpacing = minimumSpacing
-        layout.minimumInteritemSpacing = minimumSpacing
-        layout.itemSize = CGSize(width: width, height: 72)
-        layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.size.width, height: 60)
-        layout.sectionHeadersPinToVisibleBounds = true
-        collectionView.contentInset = customContentInset
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
-}
-
-extension HomeViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            let dashboardHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: DashboardHeaderView.self), for: indexPath) as! DashboardHeaderView
-            return dashboardHeaderView
-        default:
-            return UICollectionReusableView()
+    
+    //MARK: - Fetch global data
+    private func getGlobalData() {
+        displayHud(true)
+        api.request(GlobalAPI.getSummary) { [weak self] (_ result: Result<GlobalResponse, Error>) in
+            self?.displayHud(false)
+            switch result {
+            case .failure(let error):
+                self?.buttonRetry.isHidden = false
+                self?.showErrorAlert(error)
+            case .success(let globalResponse):
+                self?.buttonRetry.isHidden = true
+                self?.setGlobalData(global: globalResponse.global)
+            }
+        }
+        
+//        APIManager.shared.getGlobalInfo { [weak self] result in
+//            guard let self = self else {return}
+//            switch result {
+//            case .failure(let error):
+//                self.buttonRetry.isHidden = false
+//                self.showErrorAlert(error)
+//            case .success(let global):
+//                self.buttonRetry.isHidden = true
+//                self.setGlobalData(global: global)
+//            }
+//        }
+    }
+    
+    //MARK: - Fetch countries data
+    private func fetchCountries() {
+        displayHud(true)
+        APIManager.shared.getAllCountries { [weak self] result in
+            self?.displayHud(false)
+            switch result {
+            case .failure(let error):
+                self?.showErrorAlert(error)
+            case .success(let countries):
+                self?.allCountries = countries
+                self?.reloadCountriesData()
+            }
+        }
+    }
+    
+    //MARK: - Feeding UI elements with data
+    private func setGlobalData(global: Global) {
+        deaths.text = global.deaths.getFormattedNumber()
+        recovered.text = (global.recovered).getFormattedNumber()
+        confirmed.text = (global.confirmed).getFormattedNumber()
+        setFormattedLastUpdate()
+    }
+    
+    //MARK: - Date formater setup
+    private func setFormattedLastUpdate() {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy, h:mm a"
+        let formattedDate = dateFormatter.string(from: date)
+        let updated = "Last updated on " + formattedDate
+        let text = "Confirmed cases\n" + updated
+        
+        let attributed = NSMutableAttributedString(string: text)
+        attributed.addAttributes([.font: UIFont.systemFont(ofSize: 16, weight: .bold), .foregroundColor: UIColor(hex: "3C3C3C")], range: (text as NSString).range(of: text))
+        attributed.addAttributes([.font: UIFont.systemFont(ofSize: 14, weight: .regular), .foregroundColor: UIColor(hex: "707070")], range: (text as NSString).range(of: updated))
+        lblConfirmedInfo.attributedText = attributed
+    }
+    
+    //MARK: - Buttons actions
+    @IBAction func btnAddCountry(_ sender: UIButton) {
+        performSegue(withIdentifier: "countriesSegue", sender: nil)
+    }
+    
+    @IBAction func btnRetry(_ sender: UIButton) {
+        getGlobalData()
+    }
+    
+    //MARK: - Prepare for segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "countriesSegue" {
+            let controller = segue.destination as! CountryPickerViewController
+            controller.delegate = self
         }
     }
 }
 
+//MARK: - Extension Reload Data delegata
+extension HomeViewController: ReloadDataDelegate {
+    func reloadCountriesData() {
+        selectedCountries = allCountries.filter {$0.isSelected}
+        collectionView.reloadData()
+    }
+}
+
+//MARK: - Extension Collection View data source
 extension HomeViewController: UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let collectionDataItem = collectionData[section]
-        switch collectionDataItem {
-        case .countries(let countries):
-            return countries.count
-        }
+        return selectedCountries.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryCell", for: indexPath) as! CountryCell
-        let collectionDataItem = collectionData[indexPath.section]
-        
-        switch collectionDataItem {
-        case .countries(let countries):
-            let country = countries[indexPath.row]
-            cell.configureCell(with: country)
-            return cell
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryCell", for: indexPath) as! CountryCollectionViewCell
+        let country = selectedCountries[indexPath.row]
+        cell.setupCell()
+        cell.setCountryData(country)
+        return cell
     }
+}
+
+//MARK: - Extension Collection View FlowLayout delegata
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 165, height: 70)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
 }
