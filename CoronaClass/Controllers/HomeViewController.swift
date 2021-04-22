@@ -159,15 +159,18 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return selectedCountries.count
     }
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryCell", for: indexPath) as! CountryCollectionViewCell
         cell.setupCell()
-        let country = selectedCountries[indexPath.row]
-        let cellCountries = confirmedCasesCountries.filter({$0.countryCode == country.isoCode})
-        cell.lblCountryName.text = country.name
-        
-        //cell.setCountryData(country)
+        for country in selectedCountries {
+            getConfirmedCases(country)
+            let cellCountries = confirmedCasesCountries.filter({$0.countryName == country.slug})
+            let cellCountry = cellCountries[indexPath.row]
+            cell.lblCountryName.text = cellCountry.countryName
+            cell.lblCountryName.text = "\(cellCountry.cases)"
+        }
         return cell
     }
 }
