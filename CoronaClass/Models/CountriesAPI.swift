@@ -16,7 +16,6 @@ enum CountriesAPI: EndPoint {
         case .getAllCountries:
             return request(forEndPoint: "/countries")
         }
-        
     }
     
     var httpMethod: String {

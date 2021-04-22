@@ -15,25 +15,15 @@ enum CountryAPI: EndPoint {
     case getAllStatusForDayOne(country: Country)
     
     var request: URLRequest? {
-//        //https://api.covid19api.com/country/[country-Slug]/status/confirmed/live?from=[fromDate]&to=[toDate
-//
-//
-//
-//
-//
-//        20:07
-//        //https://api.covid19api.com/dayone/country/south-africa/status/confirmed
-//        20:07
-//        //https://api.covid19api.com/dayone/country/south-africa
         switch self {
-        case .getConfirmedCases(let country, let fromDate, let toDate):
-        return request(forEndPoint: "/[country/\(country.slug)/status/confirmed/live")
+        case .getConfirmedCases(let country, _, _):
+        return request(forEndPoint: "/country/\(country.slug)/status/confirmed/live")
         
         case .getConfirmedCasesDayOne(country: let country):
         return request(forEndPoint: "dayone/country/\(country.slug)/status/confirmed")
         
         case .getAllStatusForDayOne(country: let country):
-        return request(forEndPoint: "dayone/country/\(country.slug)/status/confirmed")
+        return request(forEndPoint: "dayone/country/\(country.slug)")
         }
     }
     
@@ -56,7 +46,7 @@ enum CountryAPI: EndPoint {
     
     var queryItems: [URLQueryItem]? {
         switch self {
-        case .getConfirmedCases(let country, let fromDate, let toDate):
+        case .getConfirmedCases( _, let fromDate, let toDate):
             var queryItems = [URLQueryItem]()
             let fromItem = URLQueryItem(name: "from", value: DateFormatter.isoFullFormatter.string(from: fromDate))
             let toItem = URLQueryItem(name: "to", value: DateFormatter.isoFullFormatter.string(from: toDate))

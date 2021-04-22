@@ -23,7 +23,8 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
     
     //MARK: - Variables
     private var selectedCountries = [Country]()
-    private(set) var allCountries = [Country]()
+    fileprivate(set) var allCountries = [Country]()
+    private var confirmedCasesCountries = [ConfirmedCasesByDay]()
     private let api = WebServices()
     
     var hud: JGProgressHUD?
@@ -42,94 +43,7 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
         fetchCountries()
     }
     
-    //MARK: - UI elements setup
-    private func addNavigationView() {
-        let navigationView = NavigationView(state: .onlyTitle, delegate: nil, title: "Dashboard")
-        navigationHolderView.addSubview(navigationView)
-        navigationView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-    }
-    
-    private func setupGlobalHolder() {
-        globalHolderView.layer.cornerRadius = 8
-        globalHolderView.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
-        globalHolderView.layer.shadowOpacity = 1.0
-        globalHolderView.layer.shadowRadius = 10
-        globalHolderView.layer.shadowOffset = CGSize(width: 0, height: 2)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    //MARK: - Fetch global data
-    private func getGlobalData() {
-        displayHud(true)
-        api.request(GlobalAPI.getSummary) { [weak self] (_ result: Result<GlobalResponse, Error>) in
-            self?.displayHud(false)
-            switch result {
-            case .failure(let error):
-                self?.buttonRetry.isHidden = false
-                self?.showErrorAlert(error)
-            case .success(let globalResponse):
-                self?.buttonRetry.isHidden = true
-                self?.setGlobalData(global: globalResponse.global)
-            }
-        }
-        
-//        APIManager.shared.getGlobalInfo { [weak self] result in
-//            guard let self = self else {return}
-//            switch result {
-//            case .failure(let error):
-//                self.buttonRetry.isHidden = false
-//                self.showErrorAlert(error)
-//            case .success(let global):
-//                self.buttonRetry.isHidden = true
-//                self.setGlobalData(global: global)
-//            }
-//        }
-    }
-    
-    //MARK: - Fetch countries data
-    private func fetchCountries() {
-        displayHud(true)
-        APIManager.shared.getAllCountries { [weak self] result in
-            self?.displayHud(false)
-            switch result {
-            case .failure(let error):
-                self?.showErrorAlert(error)
-            case .success(let countries):
-                self?.allCountries = countries
-                self?.reloadCountriesData()
-            }
-        }
-    }
-    
-    //MARK: - Feeding UI elements with data
-    private func setGlobalData(global: Global) {
-        deaths.text = global.deaths.getFormattedNumber()
-        recovered.text = (global.recovered).getFormattedNumber()
-        confirmed.text = (global.confirmed).getFormattedNumber()
-        setFormattedLastUpdate()
-    }
-    
-    //MARK: - Date formater setup
-    private func setFormattedLastUpdate() {
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy, h:mm a"
-        let formattedDate = dateFormatter.string(from: date)
-        let updated = "Last updated on " + formattedDate
-        let text = "Confirmed cases\n" + updated
-        
-        let attributed = NSMutableAttributedString(string: text)
-        attributed.addAttributes([.font: UIFont.systemFont(ofSize: 16, weight: .bold), .foregroundColor: UIColor(hex: "3C3C3C")], range: (text as NSString).range(of: text))
-        attributed.addAttributes([.font: UIFont.systemFont(ofSize: 14, weight: .regular), .foregroundColor: UIColor(hex: "707070")], range: (text as NSString).range(of: updated))
-        lblConfirmedInfo.attributedText = attributed
-    }
-    
-    //MARK: - Buttons actions
+    //MARK: - IB actions
     @IBAction func btnAddCountry(_ sender: UIButton) {
         performSegue(withIdentifier: "countriesSegue", sender: nil)
     }
@@ -147,33 +61,119 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
     }
 }
 
-//MARK: - Extension Reload Data delegata
-extension HomeViewController: ReloadDataDelegate {
-    func reloadCountriesData() {
-        selectedCountries = allCountries.filter {$0.isSelected}
-        collectionView.reloadData()
+//MARK: - UI Configuration
+private extension HomeViewController {
+    func addNavigationView() {
+        let navigationView = NavigationView(state: .onlyTitle, delegate: nil, title: "Dashboard")
+        navigationHolderView.addSubview(navigationView)
+        navigationView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    func setupGlobalHolder() {
+        globalHolderView.layer.cornerRadius = 8
+        globalHolderView.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        globalHolderView.layer.shadowOpacity = 1.0
+        globalHolderView.layer.shadowRadius = 10
+        globalHolderView.layer.shadowOffset = CGSize(width: 0, height: 2)
+    }
+    
+    func setGlobalData(global: Global) {
+        DispatchQueue.main.async { [self] in
+            deaths.text = global.deaths.getFormattedNumber()
+            recovered.text = (global.recovered).getFormattedNumber()
+            confirmed.text = (global.confirmed).getFormattedNumber()
+        }
+        setFormattedLastUpdate()
+    }
+    
+    private func setFormattedLastUpdate() {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy, h:mm a"
+        let formattedDate = dateFormatter.string(from: date)
+        let updated = "Last updated on " + formattedDate
+        let text = "Confirmed cases\n" + updated
+        
+        let attributed = NSMutableAttributedString(string: text)
+        attributed.addAttributes([.font: UIFont.systemFont(ofSize: 16, weight: .bold), .foregroundColor: UIColor(hex: "3C3C3C")], range: (text as NSString).range(of: text))
+        attributed.addAttributes([.font: UIFont.systemFont(ofSize: 14, weight: .regular), .foregroundColor: UIColor(hex: "707070")], range: (text as NSString).range(of: updated))
+        DispatchQueue.main.async {
+            self.lblConfirmedInfo.attributedText = attributed
+        }
+    }
+}
+
+//MARK: - Networking
+private extension HomeViewController {
+    func getGlobalData() {
+        displayHud(true)
+        api.request(GlobalAPI.getSummary) { [weak self] (_ result: Result<GlobalResponse, Error>) in
+            DispatchQueue.main.async {
+                self?.displayHud(false)
+                switch result {
+                case .failure(let error):
+                    self?.buttonRetry.isHidden = false
+                    self?.showErrorAlert(error)
+                case .success(let globalResponse):
+                    self?.buttonRetry.isHidden = true
+                    self?.setGlobalData(global: globalResponse.global)
+                }
+            }
+        }
+    }
+    
+    func fetchCountries() {
+        displayHud(true)
+        api.request(CountriesAPI.getAllCountries) { (_ result: Result<[Country], Error>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .failure(let error):
+                    self.showErrorAlert(error)
+                    print(error.localizedDescription)
+                case.success(let countries):
+                    self.allCountries = countries
+                    self.reloadCountriesData()
+                }
+            }
+        }
+    }
+    
+    func getConfirmedCases(_ country: Country) {
+        api.request(CountryAPI.getConfirmedCases(country, Date().minus(days: 1), Date())) { (_ result: Result<[ConfirmedCasesByDay], Error>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .success(let casesByDay):
+                    self.confirmedCasesCountries = casesByDay
+                }
+            }
+        }
     }
 }
 
 //MARK: - Extension Collection View data source
 extension HomeViewController: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return selectedCountries.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryCell", for: indexPath) as! CountryCollectionViewCell
-        let country = selectedCountries[indexPath.row]
         cell.setupCell()
-        cell.setCountryData(country)
+        let country = selectedCountries[indexPath.row]
+        let cellCountries = confirmedCasesCountries.filter({$0.countryCode == country.isoCode})
+        cell.lblCountryName.text = country.name
+        
+        //cell.setCountryData(country)
         return cell
     }
 }
 
-//MARK: - Extension Collection View FlowLayout delegata
+//MARK: - Extension Collection View FlowLayout delegate
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 165, height: 70)
     }
@@ -186,5 +186,12 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
-    
+}
+
+//MARK: - Extension Reload Data delegate
+extension HomeViewController: ReloadDataDelegate {
+    func reloadCountriesData() {
+        selectedCountries = allCountries.filter {$0.isSelected}
+        collectionView.reloadData()
+    }
 }

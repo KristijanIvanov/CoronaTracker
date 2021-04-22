@@ -13,7 +13,7 @@ struct ConfirmedCasesByDay: Codable {
     let lat: String
     let lon: String
     let cases: Int
-    let date: Date
+    let date: String
     
     private enum CodingKeys: String, CodingKey {
         case countryName = "Country"

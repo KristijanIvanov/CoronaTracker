@@ -12,7 +12,7 @@ protocol ReloadDataDelegate: AnyObject {
     func reloadCountriesData()
 }
 
-class CountryPickerViewController: UIViewController, DisplayHudProtocol, Alertable {
+class CountryPickerViewController: UIViewController, DisplayHudProtocol, Alertable, UISearchControllerDelegate {
     
     //MARK: - UI elements
     @IBOutlet weak var navigationHolderView: UIView!
@@ -28,11 +28,10 @@ class CountryPickerViewController: UIViewController, DisplayHudProtocol, Alertab
     //MARK: - Variable delegate
     weak var delegate: ReloadDataDelegate?
     
-    
-    
     //MARK: - Variables
     private var countries = [Country]()
     var hud: JGProgressHUD?
+    var userDidTapSearch = false
     
     //MARK: - Country data source variable
     var countriesDataSource: [Country] {
@@ -59,8 +58,15 @@ class CountryPickerViewController: UIViewController, DisplayHudProtocol, Alertab
         setupSearchController()
     }
     
-    //MARK: - UI elements setup
-    private func addNavigationView() {
+    //MARK: - Segment control action
+    @IBAction func onSegmentChanged(_ segmentControl: UISegmentedControl) {
+        tableView.reloadData()
+    }
+}
+
+//MARK: - UI Configuration
+private extension CountryPickerViewController {
+    func addNavigationView() {
         let navigationView = NavigationView(state: .backAndTitle, delegate: self, title: "Add Country")
         navigationHolderView.addSubview(navigationView)
         navigationView.snp.makeConstraints { make in
@@ -68,14 +74,13 @@ class CountryPickerViewController: UIViewController, DisplayHudProtocol, Alertab
         }
     }
     
-    //MARK: - Segment control setup
-    private func configureSegmentControl() {
+    func configureSegmentControl() {
         segmenControl.setBackgroundImage(nil, for: .normal, barMetrics: .compact)
         segmenControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         segmenControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
     }
     
-    private func setupTableView() {
+    func setupTableView() {
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.rowHeight = 80
@@ -85,51 +90,37 @@ class CountryPickerViewController: UIViewController, DisplayHudProtocol, Alertab
         tableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.reuseIdentifier)
     }
     
-    private func setupSearchController() {
+    func setupSearchController() {
         searchHolderView.layer.cornerRadius = 25
         searchHolderView.layer.masksToBounds = true
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Search Countries"
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
-        searchHolderView.addSubview(searchController.searchBar)
-        searchController.extendedLayoutIncludesOpaqueBars = true
         searchController.automaticallyShowsCancelButton = false
         searchController.definesPresentationContext = true
         searchController.extendedLayoutIncludesOpaqueBars = true
-        searchHolderView.clipsToBounds = true
-    }
-    
-    
-    //MARK: - Fetch countries
+        searchHolderView.addSubview(searchController.searchBar)
+        searchController.delegate = self
+        searchHolderView.clipsToBounds = true    }
+}
+
+//MARK: - Networking
+extension CountryPickerViewController {
     private func fetchCountries() {
         displayHud(true)
         api.request(CountriesAPI.getAllCountries) { (_ result: Result<[Country], Error>) in
-            self.displayHud(false)
-            switch result {
-            case .failure(let error):
-                self.showErrorAlert(error)
-            case .success(let countries):
-                self.countries = countries.sorted(by: {$0.name < $1.name})
+            DispatchQueue.main.async {
+                self.displayHud(false)
+                switch result {
+                case .failure(let error):
+                    self.showErrorAlert(error)
+                case .success(let countries):
+                    self.countries = countries.sorted(by: {$0.name < $1.name})
+                    self.tableView.reloadData()
+                }
             }
         }
-        
-//        displayHud(true)
-//        APIManager.shared.getAllCountries { [weak self] result in
-//            self?.displayHud(false)
-//            switch result {
-//            case .failure(let error):
-//                self?.showErrorAlert(error)
-//            case .success(let countries):
-//                self?.countries = countries.sorted(by: {$0.name < $1.name})
-//                self?.tableView.reloadData()
-//            }
-//        }
-    }
-    
-    //MARK: - Segment control action
-    @IBAction func onSegmentChanged(_ segmentControl: UISegmentedControl) {
-        tableView.reloadData()
     }
 }
 
