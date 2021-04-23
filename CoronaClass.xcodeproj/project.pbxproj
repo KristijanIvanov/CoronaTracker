@@ -129,9 +129,9 @@
 			isa = PBXGroup;
 			children = (
 				91BE5706261E23D400FDAB54 /* Models */,
-				91AA3F792626127100A44CE4 /* CollectionCells */,
-				916FCBD52620C9D000880D1F /* Protocols */,
 				91BE5708261E23F900FDAB54 /* Views */,
+				91BE5702261E23B400FDAB54 /* Controllers */,
+				916FCBD52620C9D000880D1F /* Protocols */,
 				91BE5707261E23E000FDAB54 /* Extensions */,
 				91BE5705261E23CA00FDAB54 /* API */,
 				91BE56D6261E121C00FDAB54 /* AppDelegate.swift */,
@@ -140,8 +140,6 @@
 				91BE56DF261E121C00FDAB54 /* Assets.xcassets */,
 				91BE56E1261E121C00FDAB54 /* LaunchScreen.storyboard */,
 				91BE56E4261E121C00FDAB54 /* Info.plist */,
-				91BE5702261E23B400FDAB54 /* Controllers */,
-				916FCBCF2620B4EA00880D1F /* TableCells */,
 			);
 			path = CoronaClass;
 			sourceTree = "<group>";
@@ -192,6 +190,8 @@
 		91BE5708261E23F900FDAB54 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				916FCBCF2620B4EA00880D1F /* TableCells */,
+				91AA3F792626127100A44CE4 /* CollectionCells */,
 				91BE56FA261E168300FDAB54 /* NavigationView.swift */,
 			);
 			path = Views;
@@ -449,6 +449,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8T998FMSKS;
 				INFOPLIST_FILE = CoronaClass/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -468,6 +469,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8T998FMSKS;
 				INFOPLIST_FILE = CoronaClass/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -10,14 +10,14 @@ import Foundation
 enum CountryAPI: EndPoint {
 
     
-    case getConfirmedCases(_ country: Country, _ from: Date, _ to: Date)
+    case getConfirmedCases(country: Country, startDate: Date, endDate: Date)
     case getConfirmedCasesDayOne(country: Country)
     case getAllStatusForDayOne(country: Country)
     
     var request: URLRequest? {
         switch self {
         case .getConfirmedCases(let country, _, _):
-        return request(forEndPoint: "/country/\(country.slug)/status/confirmed/live")
+        return request(forEndPoint: "/country/\(country.slug)/status/confirmed")
         
         case .getConfirmedCasesDayOne(country: let country):
         return request(forEndPoint: "dayone/country/\(country.slug)/status/confirmed")

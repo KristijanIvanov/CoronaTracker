@@ -9,7 +9,7 @@ import UIKit
 import JGProgressHUD
 
 protocol ReloadDataDelegate: AnyObject {
-    func reloadCountriesData()
+    func didSelectCountry(_ country: Country)
 }
 
 class CountryPickerViewController: UIViewController, DisplayHudProtocol, Alertable, UISearchControllerDelegate {
@@ -153,7 +153,7 @@ extension CountryPickerViewController: UITableViewDataSource {
 //MARK: - Extension Country Selection Protocol
 extension CountryPickerViewController: CountrySelectionDelegate {
     func didChangeValueOn(country: Country) {
-        delegate?.reloadCountriesData()
+        delegate?.didSelectCountry(country)
         guard let index = countriesDataSource.firstIndex(where: {$0.isoCode == country.isoCode}) else {
             return
         }

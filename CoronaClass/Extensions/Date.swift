@@ -24,7 +24,7 @@
 
 import Foundation
 
-public extension Date {
+extension Date {
     
     public func plus(seconds s: UInt) -> Date {
         return self.addComponentsToDate(seconds: Int(s), minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
@@ -386,7 +386,7 @@ public extension Date {
     }
     
     var shortDate: String {
-        let today = Date()
+        _ = Date()
         let dateFormatter = DateFormatter();
         dateFormatter.dateFormat = "dd/MM/yyyy"
         return dateFormatter.string(from: self)
@@ -553,19 +553,6 @@ public extension Date {
         return dateFormatter.string(from: self)
     }
     
-//    public func setTime(hour: Int, min: Int, sec: Int, timeZoneAbbrev: String = "UTC") -> Date? {
-//        let x: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
-//        let cal = Calendar.current
-//        var components = cal.dateComponents(x, from: self)
-//        
-//        components.timeZone = TimeZone(abbreviation: timeZoneAbbrev)
-//        components.hour = hour
-//        components.minute = min
-//        components.second = sec
-//        
-//        return cal.date(from: components)
-//    }
-    
     func setTime(hour: Int, min: Int, sec: Int) -> Date? {
         let date = Calendar.current.date(bySettingHour: hour, minute: min, second: sec, of: self)!
         return date
@@ -589,7 +576,7 @@ public extension Date {
             let timeFormatter = DateFormatter()
             timeFormatter.timeZone = .autoupdatingCurrent
             timeFormatter.dateFormat = "hh:mm a"
-            let time = timeFormatter.string(from: self)
+            _ = timeFormatter.string(from: self)
             return (self.isYesterday ? "Yesterday" : "Today") + " at " + timeString()
         }
         

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Country: Codable {
+struct Country: Codable, Hashable {
     let name: String
     let slug: String
     let isoCode: String

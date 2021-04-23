@@ -57,12 +57,7 @@ extension EndPoint {
         //Set http method
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod
-//        if let httpHeaders = httpHeaders {
-//            for (key, value) in httpHeaders {
-//                request.setValue(value, forHTTPHeaderField: key)
-//            }
-//
-//        }
+
         //Set http headers if any
         if let httpHeaders = httpHeaders {
             httpHeaders.forEach {(key, value) in

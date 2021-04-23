@@ -24,8 +24,7 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
     //MARK: - Variables
     private var selectedCountries = [Country]()
     fileprivate(set) var allCountries = [Country]()
-    var countriesToCompareWith = [Country]()
-    var selectedCountriesConfirmedCases = [ConfirmedCasesByDay]()
+    private var confirmedCasesCountries = [ConfirmedCasesByDay]()
     private let api = WebServices()
     
     var hud: JGProgressHUD?
@@ -135,22 +134,25 @@ private extension HomeViewController {
                     print(error.localizedDescription)
                 case.success(let countries):
                     self.allCountries = countries
-                    self.reloadCountriesData()
+                    self.getConfirmedCasesForSelectedCountries()
                 }
             }
         }
     }
     
     func getConfirmedCases(_ country: Country) {
-        api.request(CountryAPI.getConfirmedCases(country, Date().minus(days: 1), Date())) { (_ result: Result<[ConfirmedCasesByDay], Error>) in
-//            DispatchQueue.main.async {
+        api.request(CountryAPI.getConfirmedCases(country: country, startDate: Date().minus(days: 1), endDate: Date())) { (_ result: Result<[ConfirmedCasesByDay], Error>) in
+            DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):
                     print(error.localizedDescription)
                 case .success(let casesByDay):
-                    self.selectedCountriesConfirmedCases = casesByDay
+                    guard casesByDay.count > 0 else { return }
+                    let lastCase = casesByDay[casesByDay.count - 1]
+                    self.confirmedCasesCountries.append(lastCase)
+                    self.collectionView.reloadData()
                 }
-//            }
+           }
         }
     }
 }
@@ -161,13 +163,19 @@ extension HomeViewController: UICollectionViewDataSource {
         return selectedCountries.count
     }
 
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryCell", for: indexPath) as! CountryCollectionViewCell
+        cell.delegate = self
         cell.setupCell()
-        let cellCountry = selectedCountriesConfirmedCases[indexPath.row]
-        cell.lblCountryName.text = cellCountry.countryName
-        cell.lblCountryName.text = "\(cellCountry.cases)"
+        let country = selectedCountries[indexPath.row]
+        
+        if let index = confirmedCasesCountries.firstIndex(where: { $0.countryCode == country.isoCode}) {
+            let confirmedCase = confirmedCasesCountries[index]
+            cell.configureCell(countryConfirmedCase: confirmedCase)
+        } else {
+            cell.configureCell(country: country)
+        }
+    
         return cell
     }
 }
@@ -190,16 +198,33 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 //MARK: - Extension Reload Data delegate
 extension HomeViewController: ReloadDataDelegate {
-    func reloadCountriesData() {
+    func getConfirmedCasesForSelectedCountries() {
         selectedCountries = allCountries.filter {$0.isSelected}
-        for country in selectedCountries {
-            getConfirmedCases(country)
-            countriesToCompareWith.append(country)
-        }
-        for displayedCountry in countriesToCompareWith {
-            print(countriesToCompareWith)
-            selectedCountriesConfirmedCases = selectedCountriesConfirmedCases.filter({$0.countryCode == displayedCountry.isoCode})
-        }
         collectionView.reloadData()
+        selectedCountries.forEach { country in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.getConfirmedCases(country)
+            }
+        }
+    }
+    
+    func didSelectCountry(_ country: Country) {
+        selectedCountries = allCountries.filter {$0.isSelected}
+        
+        if !country.isSelected {
+            confirmedCasesCountries.removeAll(where: {$0.countryCode == country.isoCode})
+            collectionView.reloadData()
+        } else {
+            getConfirmedCases(country)
+        }
+    }
+}
+
+extension HomeViewController: CountryCellDelegate {
+    func didAddLastCase(_ lastCase: ConfirmedCasesByDay, for country: Country) {
+        confirmedCasesCountries.append(lastCase)
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
 }

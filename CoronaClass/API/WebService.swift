@@ -42,25 +42,12 @@ class WebServices: WebServiceProtocol {
             guard let data = data else {return}
             print("Missing data")
             
-            //This is the same with the line#53
-//            self.parser.json(data: data) { (result: Result<T, Error>) in
-//                switch result {
-//                case .success(let parsedObject):
-//                    completion(.success(parsedObject))
-//                case .failure(let error):
-//                    completion(.failure(error))
-//                }
-//            }l
             self.parser.json(data: data, completion: completion)
 
-        }//.resume()
+        }
         task.resume()
     }
 }
-
-//protocol ParserProtocol {
-//    func json<T: Decodable>(data: Data, completion: @escaping ResultsCompletion<T>)
-//}
 
 struct Parser {
     private let jsonDecoder = JSONDecoder()
@@ -74,3 +61,6 @@ struct Parser {
         }
     }
 }
+
+//https://api.covid19api.com/country/algeria/status/confirmed?from=2021-04-22T10:26:38+0000&to=2021-04-23T10:26:38+0000
+//https://api.covid19api.com/country/algeria/status/confirmed?from=2020-03-01T00:00:00Z&to=2020-04-01T00:00:00Z
