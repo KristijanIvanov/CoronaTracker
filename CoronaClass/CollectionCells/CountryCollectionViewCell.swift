@@ -26,28 +26,10 @@ private let api = WebServices()
         contentView.layer.cornerRadius = 8
         contentView.layer.masksToBounds = true
     }
+    
     //MARK: - Setup cell's data
     func setCountryData(_ country: Country) {
         self.country = country
         lblCountryName.text = country.name
-//        getConfirmedCases(country)
     }
-    
-    //MARK: - Fetch confirmed cases
-//    private func getConfirmedCases(_ country: Country) {
-//        api.request(CountryAPI.getConfirmedCases(country, Date().minus(days: 1), Date())) { (_ result: Result<[ConfirmedCasesByDay], Error>) in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                case .success(let casesByDay):
-//                    print(casesByDay.count)
-//                    let sorted = casesByDay.sorted(by: {$0.date > $1.date })
-//                    if let today = sorted.first {
-//                        self.lblCasesNumber.text = "\(Int64(today.cases).getFormattedNumber())"
-//                    }
-//                }
-//            }
-//        }
-//    }
 }

@@ -24,7 +24,8 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
     //MARK: - Variables
     private var selectedCountries = [Country]()
     fileprivate(set) var allCountries = [Country]()
-    private var confirmedCasesCountries = [ConfirmedCasesByDay]()
+    var countriesToCompareWith = [Country]()
+    var selectedCountriesConfirmedCases = [ConfirmedCasesByDay]()
     private let api = WebServices()
     
     var hud: JGProgressHUD?
@@ -142,14 +143,14 @@ private extension HomeViewController {
     
     func getConfirmedCases(_ country: Country) {
         api.request(CountryAPI.getConfirmedCases(country, Date().minus(days: 1), Date())) { (_ result: Result<[ConfirmedCasesByDay], Error>) in
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):
                     print(error.localizedDescription)
                 case .success(let casesByDay):
-                    self.confirmedCasesCountries = casesByDay
+                    self.selectedCountriesConfirmedCases = casesByDay
                 }
-            }
+//            }
         }
     }
 }
@@ -164,13 +165,9 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryCell", for: indexPath) as! CountryCollectionViewCell
         cell.setupCell()
-        for country in selectedCountries {
-            getConfirmedCases(country)
-            let cellCountries = confirmedCasesCountries.filter({$0.countryName == country.slug})
-            let cellCountry = cellCountries[indexPath.row]
-            cell.lblCountryName.text = cellCountry.countryName
-            cell.lblCountryName.text = "\(cellCountry.cases)"
-        }
+        let cellCountry = selectedCountriesConfirmedCases[indexPath.row]
+        cell.lblCountryName.text = cellCountry.countryName
+        cell.lblCountryName.text = "\(cellCountry.cases)"
         return cell
     }
 }
@@ -195,6 +192,14 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 extension HomeViewController: ReloadDataDelegate {
     func reloadCountriesData() {
         selectedCountries = allCountries.filter {$0.isSelected}
+        for country in selectedCountries {
+            getConfirmedCases(country)
+            countriesToCompareWith.append(country)
+        }
+        for displayedCountry in countriesToCompareWith {
+            print(countriesToCompareWith)
+            selectedCountriesConfirmedCases = selectedCountriesConfirmedCases.filter({$0.countryCode == displayedCountry.isoCode})
+        }
         collectionView.reloadData()
     }
 }
