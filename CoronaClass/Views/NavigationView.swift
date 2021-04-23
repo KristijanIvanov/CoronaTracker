@@ -14,16 +14,17 @@ protocol NavigationViewDelegate: AnyObject {
 }
 
 class NavigationView: UIView {
-    
-
+    //MARK: - Navigation state enum
     enum NavigationState {
         case onlyTitle
         case backAndTitle
     }
-    
+    //MARK: - Variables and constants
     private weak var delegate: NavigationViewDelegate?
     private var gradientLayer: CAGradientLayer?
+    private let state: NavigationState
     
+    //MARK - UI elements
     private lazy var btnBack: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "back"), for: .normal)
@@ -39,8 +40,7 @@ class NavigationView: UIView {
         return label
     }()
     
-    private let state: NavigationState
-    
+    //MARK - Navigation state init
     init(state: NavigationState, delegate: NavigationViewDelegate?, title: String) {
         self.state = state
         super.init(frame: .zero)
@@ -52,7 +52,7 @@ class NavigationView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //MARK: - Setup view
     private func setupView() {
         setupGradient()
         switch state {
@@ -82,7 +82,7 @@ class NavigationView: UIView {
             }
         }
     }
-    
+    //MARK: - Gradient setup
     private func setupGradient() {
         gradientLayer = CAGradientLayer()
         gradientLayer?.colors = [UIColor(hex: "9ADCB9").cgColor, UIColor(hex: "5AC7AA").cgColor]
@@ -92,7 +92,7 @@ class NavigationView: UIView {
         layer.addSublayer(gradientLayer!)
     }
     
-
+    //MARK: - Protocol implementation
     @objc private func onBack() {
         delegate?.didTapBack()
     }
