@@ -31,7 +31,6 @@ class CountryMapCollectionViewCell: UICollectionViewCell {
     
     lazy var button: UIButton = {
         var button = UIButton()
-        button.backgroundColor = .red
         button.titleLabel?.text = "View country map"
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         button.addTarget(self, action: #selector(onMap), for: .touchUpInside)
@@ -47,6 +46,21 @@ class CountryMapCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        setNeedsLayout()
+        layoutIfNeeded()
+        
+        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
+        var frame = layoutAttributes.frame
+        frame.size.height = ceil(size.height)
+        
+        return layoutAttributes
+    }
+    
+    // fixing cell width
+    override func awakeFromNib() {
+        contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,19 +84,17 @@ class CountryMapCollectionViewCell: UICollectionViewCell {
 
         flagImage.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(2)
-            make.leading.equalTo(verticalStackView)
-            make.height.width.equalTo(32)
+            make.top.bottom.equalToSuperview()
+            make.trailing.equalTo(verticalStackView)
+            make.height.width.equalTo(38)
         }
         
         verticalStackView.snp.makeConstraints { make in
             make.leading.equalTo(flagImage)
+            make.trailing.equalToSuperview()
+            make.top.bottom.equalToSuperview()
             make.height.equalTo(38)
 //            make.top.bottom.equalToSuperview()
-        }
-
-        button.snp.makeConstraints { make in
-            make.height.equalTo(17)
-//            make.leading.equalTo(flagImage).offset(3)
         }
     }
     

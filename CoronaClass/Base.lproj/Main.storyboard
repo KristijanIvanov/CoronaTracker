@@ -233,9 +233,9 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <constraints>
-                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="top" secondItem="r3C-wY-uVP" secondAttribute="topMargin" constant="-8" id="F7w-bv-KVi"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="qHQ-Be-J5b" secondAttribute="trailing" constant="-8" id="KtY-KU-km1"/>
-                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="leading" secondItem="r3C-wY-uVP" secondAttribute="leadingMargin" constant="-8" id="Mid-Xs-ENf"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="qHQ-Be-J5b" secondAttribute="trailing" constant="-8" id="LgV-Px-Ja0"/>
+                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="top" secondItem="r3C-wY-uVP" secondAttribute="topMargin" constant="-8" id="TXf-9l-7jd"/>
+                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="leading" secondItem="r3C-wY-uVP" secondAttribute="leadingMargin" constant="-8" id="zh0-n8-Ro3"/>
                                         </constraints>
                                         <size key="customSize" width="165" height="70"/>
                                         <connections>
@@ -448,29 +448,40 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hcW-EB-GaC">
                                 <rect key="frame" x="0.0" y="124" width="390" height="720"/>
                             </mapView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cIB-KW-faN">
-                                <rect key="frame" x="0.0" y="124" width="390" height="720"/>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wD0-hd-cJp">
+                                <rect key="frame" x="145" y="422" width="100" height="0.0"/>
+                                <color key="backgroundColor" red="0.3529411764705882" green="0.7803921568627451" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="g3h-89-Qxa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mOz-7K-6cE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="wD0-hd-cJp" firstAttribute="centerY" secondItem="H2N-Fr-abs" secondAttribute="centerY" id="0zn-af-p9C"/>
                             <constraint firstItem="hcW-EB-GaC" firstAttribute="trailing" secondItem="mOz-7K-6cE" secondAttribute="trailing" id="2W9-5p-BVw"/>
-                            <constraint firstItem="cIB-KW-faN" firstAttribute="top" secondItem="cTA-3r-EhV" secondAttribute="bottom" id="7W3-uY-ETi"/>
-                            <constraint firstItem="cIB-KW-faN" firstAttribute="trailing" secondItem="mOz-7K-6cE" secondAttribute="trailing" id="9R6-tP-QNG"/>
-                            <constraint firstAttribute="bottom" secondItem="cIB-KW-faN" secondAttribute="bottom" id="EpP-ze-FTw"/>
+                            <constraint firstItem="wD0-hd-cJp" firstAttribute="centerX" secondItem="H2N-Fr-abs" secondAttribute="centerX" id="GUt-PK-TIK"/>
                             <constraint firstItem="cTA-3r-EhV" firstAttribute="leading" secondItem="mOz-7K-6cE" secondAttribute="leading" id="HCb-nF-5vg"/>
                             <constraint firstItem="hcW-EB-GaC" firstAttribute="top" secondItem="cTA-3r-EhV" secondAttribute="bottom" id="NuZ-ee-SQB"/>
                             <constraint firstItem="cTA-3r-EhV" firstAttribute="trailing" secondItem="mOz-7K-6cE" secondAttribute="trailing" id="P3r-cU-CdT"/>
                             <constraint firstAttribute="bottom" secondItem="hcW-EB-GaC" secondAttribute="bottom" id="a0X-y7-e4L"/>
                             <constraint firstItem="cTA-3r-EhV" firstAttribute="top" secondItem="H2N-Fr-abs" secondAttribute="top" id="d9j-yQ-Zq1"/>
                             <constraint firstItem="hcW-EB-GaC" firstAttribute="leading" secondItem="mOz-7K-6cE" secondAttribute="leading" id="nad-cV-h7v"/>
-                            <constraint firstItem="cIB-KW-faN" firstAttribute="leading" secondItem="mOz-7K-6cE" secondAttribute="leading" id="s4H-fg-N0H"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LUM-tK-yJP"/>
                     <connections>
-                        <outlet property="mapIMage" destination="cIB-KW-faN" id="ddj-aD-qNo"/>
+                        <outlet property="confirmedCasesLbl" destination="wD0-hd-cJp" id="TpQ-xB-w8F"/>
                         <outlet property="mapView" destination="hcW-EB-GaC" id="89D-QF-KXM"/>
                         <outlet property="navigationHolderView" destination="cTA-3r-EhV" id="dNS-uv-QSL"/>
                     </connections>
