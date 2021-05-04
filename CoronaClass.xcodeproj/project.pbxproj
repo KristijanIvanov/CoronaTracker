@@ -36,6 +36,12 @@
 		91BE56FE261E1FF800FDAB54 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE56FD261E1FF800FDAB54 /* UIColor.swift */; };
 		91BE570B261E24B600FDAB54 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE570A261E24B600FDAB54 /* APIManager.swift */; };
 		91BE570E261E24E000FDAB54 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE570D261E24E000FDAB54 /* Country.swift */; };
+		CD47298526399D420061AC2E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CD47298426399D420061AC2E /* Kingfisher */; };
+		CD4729AA26409A1E0061AC2E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4729A926409A1E0061AC2E /* MapViewController.swift */; };
+		CDF17A7A2635F86200C7D23E /* CountryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF17A792635F86200C7D23E /* CountryDetailsViewController.swift */; };
+		CDF17A822636E0C000C7D23E /* CountryDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF17A802636E0C000C7D23E /* CountryDetailsCollectionViewCell.swift */; };
+		CDF17A832636E0C000C7D23E /* CountryDetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDF17A812636E0C000C7D23E /* CountryDetailsCollectionViewCell.xib */; };
+		CDF17A862637179700C7D23E /* CountryMapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF17A852637179700C7D23E /* CountryMapCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +73,11 @@
 		91BE56FD261E1FF800FDAB54 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		91BE570A261E24B600FDAB54 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		91BE570D261E24E000FDAB54 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		CD4729A926409A1E0061AC2E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		CDF17A792635F86200C7D23E /* CountryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailsViewController.swift; sourceTree = "<group>"; };
+		CDF17A802636E0C000C7D23E /* CountryDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
+		CDF17A812636E0C000C7D23E /* CountryDetailsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryDetailsCollectionViewCell.xib; sourceTree = "<group>"; };
+		CDF17A852637179700C7D23E /* CountryMapCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryMapCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD47298526399D420061AC2E /* Kingfisher in Frameworks */,
 				91BE56ED261E12BE00FDAB54 /* Alamofire in Frameworks */,
 				916FCBD32620C94A00880D1F /* JGProgressHUD in Frameworks */,
 				91BE56F8261E166C00FDAB54 /* SnapKit in Frameworks */,
@@ -105,6 +117,9 @@
 			isa = PBXGroup;
 			children = (
 				91AA3F7B262612B900A44CE4 /* CountryCollectionViewCell.swift */,
+				CDF17A802636E0C000C7D23E /* CountryDetailsCollectionViewCell.swift */,
+				CDF17A812636E0C000C7D23E /* CountryDetailsCollectionViewCell.xib */,
+				CDF17A852637179700C7D23E /* CountryMapCollectionViewCell.swift */,
 			);
 			path = CollectionCells;
 			sourceTree = "<group>";
@@ -149,6 +164,8 @@
 			children = (
 				91BE56F0261E134C00FDAB54 /* HomeViewController.swift */,
 				91BE56F3261E14C200FDAB54 /* CountryPickerViewController.swift */,
+				CDF17A792635F86200C7D23E /* CountryDetailsViewController.swift */,
+				CD4729A926409A1E0061AC2E /* MapViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -217,6 +234,7 @@
 				91BE56EC261E12BE00FDAB54 /* Alamofire */,
 				91BE56F7261E166C00FDAB54 /* SnapKit */,
 				916FCBD22620C94A00880D1F /* JGProgressHUD */,
+				CD47298426399D420061AC2E /* Kingfisher */,
 			);
 			productName = CoronaClass;
 			productReference = 91BE56D3261E121C00FDAB54 /* CoronaClass.app */;
@@ -249,6 +267,7 @@
 				91BE56EB261E12BE00FDAB54 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				91BE56F6261E166C00FDAB54 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				916FCBD12620C94A00880D1F /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				CD47298326399D420061AC2E /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 91BE56D4261E121C00FDAB54 /* Products */;
 			projectDirPath = "";
@@ -266,6 +285,7 @@
 			files = (
 				91BE56E3261E121C00FDAB54 /* LaunchScreen.storyboard in Resources */,
 				91BE56E0261E121C00FDAB54 /* Assets.xcassets in Resources */,
+				CDF17A832636E0C000C7D23E /* CountryDetailsCollectionViewCell.xib in Resources */,
 				91BE56DE261E121C00FDAB54 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,8 +304,10 @@
 				9193FE0D26275556006E8D86 /* ConfirmedCasesByDay.swift in Sources */,
 				91AA3F7C262612B900A44CE4 /* CountryCollectionViewCell.swift in Sources */,
 				91BE56D7261E121C00FDAB54 /* AppDelegate.swift in Sources */,
+				CDF17A822636E0C000C7D23E /* CountryDetailsCollectionViewCell.swift in Sources */,
 				9193FE102627560C006E8D86 /* DateFormatter+.swift in Sources */,
 				9193FE13262765B9006E8D86 /* Date.swift in Sources */,
+				CDF17A862637179700C7D23E /* CountryMapCollectionViewCell.swift in Sources */,
 				91BE56FE261E1FF800FDAB54 /* UIColor.swift in Sources */,
 				91BE56D9261E121C00FDAB54 /* SceneDelegate.swift in Sources */,
 				916FCBD72620C9F000880D1F /* DisplayHudProtocol.swift in Sources */,
@@ -297,8 +319,10 @@
 				91BE570E261E24E000FDAB54 /* Country.swift in Sources */,
 				91BE56F1261E134C00FDAB54 /* HomeViewController.swift in Sources */,
 				91BE56F4261E14C200FDAB54 /* CountryPickerViewController.swift in Sources */,
+				CD4729AA26409A1E0061AC2E /* MapViewController.swift in Sources */,
 				91695661262DECFE00C8812B /* WebService.swift in Sources */,
 				91695664262DFBBA00C8812B /* CountriesAPI.swift in Sources */,
+				CDF17A7A2635F86200C7D23E /* CountryDetailsViewController.swift in Sources */,
 				91BE570B261E24B600FDAB54 /* APIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,6 +553,14 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		CD47298326399D420061AC2E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -546,6 +578,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 91BE56F6261E166C00FDAB54 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		CD47298426399D420061AC2E /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD47298326399D420061AC2E /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -10,6 +10,7 @@ import SnapKit
 import JGProgressHUD
 
 class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
+    
     //MARK: - UI navigation elements
     @IBOutlet weak var navigationHolderView: UIView!
     @IBOutlet weak var globalHolderView: UIView!
@@ -28,7 +29,7 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
     private let api = WebServices()
     
     var hud: JGProgressHUD?
-    
+
     //MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,15 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
     
     @IBAction func btnRetry(_ sender: UIButton) {
         getGlobalData()
+    }
+    
+    func didTapButton(cell: CountryCollectionViewCell) {
+        if let indexPath = collectionView.indexPath(for: cell) {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyBoard.instantiateViewController(identifier: "CountryDetailsViewController") as! CountryDetailsViewController
+            controller.countryConfirmed = cell.countryDetailsConfirmed
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
     
     //MARK: - Prepare for segue
@@ -141,7 +151,7 @@ private extension HomeViewController {
     }
     
     func getConfirmedCases(_ country: Country) {
-        api.request(CountryAPI.getConfirmedCases(country: country, startDate: Date().minus(days: 1), endDate: Date())) { (_ result: Result<[ConfirmedCasesByDay], Error>) in
+        api.request(CountryAPI.getCases(country: country, startDate: Date().minus(days: 1), endDate: Date(), status: .confirmed)) { (_ result: Result<[ConfirmedCasesByDay], Error>) in
             DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):
@@ -166,16 +176,16 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryCell", for: indexPath) as! CountryCollectionViewCell
         cell.delegate = self
-        cell.setupCell()
-        let country = selectedCountries[indexPath.row]
-        
-        if let index = confirmedCasesCountries.firstIndex(where: { $0.countryCode == country.isoCode}) {
-            let confirmedCase = confirmedCasesCountries[index]
-            cell.configureCell(countryConfirmedCase: confirmedCase)
-        } else {
-            cell.configureCell(country: country)
-        }
-    
+        cell.delegateButton = self
+                cell.setupCell()
+                let country = selectedCountries[indexPath.row]
+                
+                if let index = confirmedCasesCountries.firstIndex(where: { $0.countryCode == country.isoCode}) {
+                    let confirmedCase = confirmedCasesCountries[index]
+                    cell.configureCell(countryConfirmedCase: confirmedCase)
+                } else {
+                    cell.configureCell(country: country)
+                }
         return cell
     }
 }
@@ -210,7 +220,6 @@ extension HomeViewController: ReloadDataDelegate {
     
     func didSelectCountry(_ country: Country) {
         selectedCountries = allCountries.filter {$0.isSelected}
-        
         if !country.isSelected {
             confirmedCasesCountries.removeAll(where: {$0.countryCode == country.isoCode})
             collectionView.reloadData()
@@ -228,3 +237,16 @@ extension HomeViewController: CountryCellDelegate {
         }
     }
 }
+
+//MARK: - Country Cell Button Delegate
+extension HomeViewController: CountryCellButtonDelegate {
+    func didClickOnButton(confirmed: ConfirmedCasesByDay, recovered: ConfirmedCasesByDay, deaths: ConfirmedCasesByDay) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyBoard.instantiateViewController(identifier: "CountryDetailsViewController") as! CountryDetailsViewController
+        controller.countryConfirmed = confirmed
+        controller.countryRecovered = recovered
+        controller.countryDeaths = deaths
+        navigationController?.pushViewController(controller, animated: true)
+    }
+}
+

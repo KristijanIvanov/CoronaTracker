@@ -12,7 +12,7 @@ struct ConfirmedCasesByDay: Codable {
     let countryCode: String
     let lat: String
     let lon: String
-    let cases: Int
+    let cases: Int64
     let date: String
     
     private enum CodingKeys: String, CodingKey {
