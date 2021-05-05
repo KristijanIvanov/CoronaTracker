@@ -30,7 +30,7 @@ class CountryDetailsViewController: UIViewController, UICollectionViewDelegate, 
 //MARK: - UI Configuration
 extension CountryDetailsViewController {
     func addNavigationView() {
-        let navigationView = NavigationView(state: .backAndTitle, delegate: self, title: "Country name")
+        let navigationView = NavigationView(state: .backAndTitle, delegate: self, title: "\(countryConfirmed!.countryName)")
         navigationHolderView.addSubview(navigationView)
     }
     
@@ -76,5 +76,11 @@ extension CountryDetailsViewController: didClickOnMap {
             let controller = storyBoard.instantiateViewController(identifier: "MapViewController") as! MapViewController
             controller.country = countryConfirmed
             navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "countryDetailsSegue" {
+            let controller = segue.destination as! CountryDetailsViewController
+        }
     }
 }

@@ -18,7 +18,8 @@ class CountryMapCollectionViewCell: UICollectionViewCell {
     
     lazy var flagImage: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .blue
+        image.layer.cornerRadius = 8
+        image.layer.masksToBounds = true
        return image
     }()
  
@@ -31,8 +32,9 @@ class CountryMapCollectionViewCell: UICollectionViewCell {
     
     lazy var button: UIButton = {
         var button = UIButton()
-        button.titleLabel?.text = "View country map"
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        button.setTitle("View Country Map", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(onMap), for: .touchUpInside)
        return button
     }()
@@ -84,14 +86,14 @@ class CountryMapCollectionViewCell: UICollectionViewCell {
 
         flagImage.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(2)
-            make.top.bottom.equalToSuperview()
-            make.trailing.equalTo(verticalStackView)
-            make.height.width.equalTo(38)
+            make.top.bottom.equalToSuperview().offset(2)
+//            make.trailing.equalTo(verticalStackView)
+            make.height.width.equalTo(32)
         }
         
         verticalStackView.snp.makeConstraints { make in
-            make.leading.equalTo(flagImage)
-            make.trailing.equalToSuperview()
+            make.leading.equalTo(flagImage).offset(5)
+//            make.trailing.equalToSuperview()
             make.top.bottom.equalToSuperview()
             make.height.equalTo(38)
 //            make.top.bottom.equalToSuperview()
