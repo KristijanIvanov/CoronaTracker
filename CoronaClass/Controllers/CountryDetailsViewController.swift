@@ -13,10 +13,22 @@ class CountryDetailsViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var navigationHolderView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var country: Country?
+    var api = WebServices()
+    
     var countryConfirmed: ConfirmedCasesByDay?
-    var countryRecovered: ConfirmedCasesByDay?
-    var countryDeaths: ConfirmedCasesByDay?
-
+    var countryRecovered: ConfirmedCasesByDay? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
+    var countryDeaths: ConfirmedCasesByDay? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let country = countryConfirmed {
@@ -24,6 +36,32 @@ class CountryDetailsViewController: UIViewController, UICollectionViewDelegate, 
         }
         registerCell()
         addNavigationView()
+        fetchData(status: .recovered)
+        fetchData(status: .deaths)
+    }
+    
+    private func fetchData(status: Status) {
+        guard let country = country else { return }
+        api.request(CountryAPI.getCases(country: country, startDate: Date().minus(days: 1), endDate: Date(), status: status)) {[weak self] (_ result: Result<[ConfirmedCasesByDay], Error>) in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let casesByDay):
+                guard casesByDay.count > 0 else { return }
+                let lastCase = casesByDay[casesByDay.count - 1]//get last one
+                DispatchQueue.main.async {
+                    switch status {
+                    case .recovered:
+                        self.countryRecovered = lastCase
+                    case .deaths:
+                        self.countryDeaths = lastCase
+                    default:
+                        break
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -32,6 +70,9 @@ extension CountryDetailsViewController {
     func addNavigationView() {
         let navigationView = NavigationView(state: .backAndTitle, delegate: self, title: "\(countryConfirmed!.countryName)")
         navigationHolderView.addSubview(navigationView)
+        navigationView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
     func registerCell() {
@@ -48,10 +89,10 @@ extension CountryDetailsViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
             let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryDetailsCollectionViewCell", for: indexPath) as! CountryDetailsCollectionViewCell
-            guard let countryConfirmed = countryConfirmed, let countryRecovered = countryRecovered, let countryDeaths = countryDeaths else {return cellA}
-            cellA.lblConfirmeCases.text = "\(countryConfirmed.cases.getFormattedNumber())"
-            cellA.lblRecoveredCase.text = "\(countryRecovered.cases.getFormattedNumber())"
-            cellA.lblDeathsCases.text = "\(countryDeaths.cases.getFormattedNumber())"
+           
+            cellA.lblConfirmeCases.text = "\(countryConfirmed?.cases.getFormattedNumber())"
+            cellA.lblRecoveredCase.text = "\(countryRecovered?.cases.getFormattedNumber())"
+            cellA.lblDeathsCases.text = "\(countryDeaths?.cases.getFormattedNumber())"
             return cellA
         } else {
             let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryMapCollectionViewCell", for: indexPath) as! CountryMapCollectionViewCell
@@ -72,10 +113,10 @@ extension CountryDetailsViewController: NavigationViewDelegate {
 
 extension CountryDetailsViewController: didClickOnMap {
     func showMap() {
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyBoard.instantiateViewController(identifier: "MapViewController") as! MapViewController
-            controller.country = countryConfirmed
-            navigationController?.pushViewController(controller, animated: true)
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyBoard.instantiateViewController(identifier: "MapViewController") as! MapViewController
+        controller.country = countryConfirmed
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -48,24 +48,9 @@ class CountryMapCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        setNeedsLayout()
-        layoutIfNeeded()
-        
-        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-        var frame = layoutAttributes.frame
-        frame.size.height = ceil(size.height)
-        
-        return layoutAttributes
-    }
-    
-    // fixing cell width
-    override func awakeFromNib() {
-        contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .blue
         setupViews()
     }
     
@@ -76,9 +61,8 @@ class CountryMapCollectionViewCell: UICollectionViewCell {
     func setupViews() {
         contentView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(63)
         }
-        
         verticalStackView.addArrangedSubview(label)
         verticalStackView.addArrangedSubview(button)
         contentView.addSubview(flagImage)

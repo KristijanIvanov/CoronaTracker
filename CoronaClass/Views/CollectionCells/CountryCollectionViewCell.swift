@@ -11,10 +11,6 @@ protocol CountryCellDelegate: AnyObject {
     func didAddLastCase(_ lastCase: ConfirmedCasesByDay, for country: Country)
 }
 
-protocol CountryCellButtonDelegate: AnyObject {
-    func didClickOnButton(confirmed: ConfirmedCasesByDay, recovered: ConfirmedCasesByDay, deaths: ConfirmedCasesByDay)
-}
-
 class CountryCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI elements
@@ -32,8 +28,6 @@ class CountryCollectionViewCell: UICollectionViewCell {
     var countryDetailsDeaths: ConfirmedCasesByDay?
     var status = Status(rawValue: "")
     
-    weak var delegateButton: CountryCellButtonDelegate?
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         lblCasesNumber.text = ""
@@ -50,11 +44,6 @@ class CountryCollectionViewCell: UICollectionViewCell {
     @IBAction func retryBtnPressed(_ sender: UIButton) {
         guard let country = country else { return }
         getConfirmedCases(country)
-    }
-    
-    @IBAction func countryDetailsBtn(_ sender: UIButton) {
-        guard let confirmed = countryDetailsConfirmed, let recovered = countryDetailsRecovered, let deaths = countryDetailsDeaths else {return}
-        delegateButton?.didClickOnButton(confirmed: confirmed, recovered: recovered, deaths: deaths)
     }
 }
 

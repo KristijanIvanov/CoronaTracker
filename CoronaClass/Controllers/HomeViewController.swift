@@ -174,21 +174,40 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return createCountryCell(at: indexPath)
+    }
+    
+    private func createCountryCell(at indexPath: IndexPath) -> CountryCollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryCell", for: indexPath) as! CountryCollectionViewCell
         cell.delegate = self
-        cell.delegateButton = self
-                cell.setupCell()
-                let country = selectedCountries[indexPath.row]
-                
-                if let index = confirmedCasesCountries.firstIndex(where: { $0.countryCode == country.isoCode}) {
-                    let confirmedCase = confirmedCasesCountries[index]
-                    cell.configureCell(countryConfirmedCase: confirmedCase)
-                } else {
-                    cell.configureCell(country: country)
-                }
+        cell.setupCell()
+        let country = selectedCountries[indexPath.row]
+        
+        if let index = confirmedCasesCountries.firstIndex(where: { $0.countryCode == country.isoCode}) {
+            let confirmedCase = confirmedCasesCountries[index]
+            cell.configureCell(countryConfirmedCase: confirmedCase)
+        } else {
+            cell.configureCell(country: country)
+        }
         return cell
     }
 }
+
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! CountryCollectionViewCell
+        
+        if cell.retryBtn.isHidden {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyBoard.instantiateViewController(identifier: "CountryDetailsViewController") as! CountryDetailsViewController
+            controller.country = cell.country
+            controller.countryConfirmed = cell.countryDetailsConfirmed
+            navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+}
+
+
 
 //MARK: - Extension Collection View FlowLayout delegate
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
@@ -237,16 +256,3 @@ extension HomeViewController: CountryCellDelegate {
         }
     }
 }
-
-//MARK: - Country Cell Button Delegate
-extension HomeViewController: CountryCellButtonDelegate {
-    func didClickOnButton(confirmed: ConfirmedCasesByDay, recovered: ConfirmedCasesByDay, deaths: ConfirmedCasesByDay) {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyBoard.instantiateViewController(identifier: "CountryDetailsViewController") as! CountryDetailsViewController
-        controller.countryConfirmed = confirmed
-        controller.countryRecovered = recovered
-        controller.countryDeaths = deaths
-        navigationController?.pushViewController(controller, animated: true)
-    }
-}
-
