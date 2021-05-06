@@ -24,11 +24,18 @@ class CountryDetailsCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .white
+        layer.cornerRadius = 10
+        layer.masksToBounds = true
+        setupViews()
     }
 
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
+        layer.cornerRadius = 20
+        layer.masksToBounds = true
         setupViews()
     }
     
@@ -40,6 +47,12 @@ class CountryDetailsCollectionViewCell: UICollectionViewCell {
         segmentedControls.setBackgroundImage(nil, for: .normal, barMetrics: .compact)
         segmentedControls.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         segmentedControls.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+    }
+    
+    func configureCell(confirmed: ConfirmedCasesByDay, recovered: ConfirmedCasesByDay, deaths: ConfirmedCasesByDay) {
+       lblConfirmeCases.text = "\(confirmed.cases.getFormattedNumber())"
+        lblRecoveredCase.text = "\(recovered.cases.getFormattedNumber())"
+        lblDeathsCases.text = "\(deaths.cases.getFormattedNumber())"
     }
 
 }

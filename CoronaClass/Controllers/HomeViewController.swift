@@ -29,18 +29,14 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
     private let api = WebServices()
     
     var hud: JGProgressHUD?
-
+    
     //MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCollectionView()
         addNavigationView()
         setupGlobalHolder()
         getGlobalData()
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 165, height: 70)
-        }
         fetchCountries()
     }
     
@@ -54,12 +50,10 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
     }
     
     func didTapButton(cell: CountryCollectionViewCell) {
-        if let indexPath = collectionView.indexPath(for: cell) {
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyBoard.instantiateViewController(identifier: "CountryDetailsViewController") as! CountryDetailsViewController
-            controller.countryConfirmed = cell.countryDetailsConfirmed
-            navigationController?.pushViewController(controller, animated: true)
-        }
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyBoard.instantiateViewController(identifier: "CountryDetailsViewController") as! CountryDetailsViewController
+        controller.countryConfirmed = cell.countryDetailsConfirmed
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     //MARK: - Prepare for segue
@@ -73,6 +67,14 @@ class HomeViewController: UIViewController, DisplayHudProtocol, Alertable {
 
 //MARK: - UI Configuration
 private extension HomeViewController {
+    func configureCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = CGSize(width: 165, height: 70)
+        }
+    }
+    
     func addNavigationView() {
         let navigationView = NavigationView(state: .onlyTitle, delegate: nil, title: "Dashboard")
         navigationHolderView.addSubview(navigationView)
@@ -162,7 +164,7 @@ private extension HomeViewController {
                     self.confirmedCasesCountries.append(lastCase)
                     self.collectionView.reloadData()
                 }
-           }
+            }
         }
     }
 }
@@ -172,20 +174,19 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return selectedCountries.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryCell", for: indexPath) as! CountryCollectionViewCell
         cell.delegate = self
-        cell.delegateButton = self
-                cell.setupCell()
-                let country = selectedCountries[indexPath.row]
-                
-                if let index = confirmedCasesCountries.firstIndex(where: { $0.countryCode == country.isoCode}) {
-                    let confirmedCase = confirmedCasesCountries[index]
-                    cell.configureCell(countryConfirmedCase: confirmedCase)
-                } else {
-                    cell.configureCell(country: country)
-                }
+        cell.setupCell()
+        let country = selectedCountries[indexPath.row]
+        
+        if let index = confirmedCasesCountries.firstIndex(where: { $0.countryCode == country.isoCode}) {
+            let confirmedCase = confirmedCasesCountries[index]
+            cell.configureCell(countryConfirmedCase: confirmedCase)
+        } else {
+            cell.configureCell(country: country)
+        }
         return cell
     }
 }
@@ -203,6 +204,17 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! CountryCollectionViewCell
+        if cell.retryBtn.isHidden {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let countryDetailsVC = storyBoard.instantiateViewController(identifier: "CountryDetailsViewController") as! CountryDetailsViewController
+            countryDetailsVC.country = cell.country
+            countryDetailsVC.countryConfirmed = cell.countryDetailsConfirmed
+            navigationController?.pushViewController(countryDetailsVC, animated: true)
+        }
     }
 }
 
@@ -235,18 +247,6 @@ extension HomeViewController: CountryCellDelegate {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
-    }
-}
-
-//MARK: - Country Cell Button Delegate
-extension HomeViewController: CountryCellButtonDelegate {
-    func didClickOnButton(confirmed: ConfirmedCasesByDay, recovered: ConfirmedCasesByDay, deaths: ConfirmedCasesByDay) {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyBoard.instantiateViewController(identifier: "CountryDetailsViewController") as! CountryDetailsViewController
-        controller.countryConfirmed = confirmed
-        controller.countryRecovered = recovered
-        controller.countryDeaths = deaths
-        navigationController?.pushViewController(controller, animated: true)
     }
 }
 

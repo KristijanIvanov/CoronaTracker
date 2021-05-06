@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QtO-M5-D1h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QtO-M5-D1h">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -172,17 +172,6 @@
                                                     <rect key="frame" x="5" y="5" width="155" height="60"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQg-CE-yZe">
-                                                    <rect key="frame" x="145" y="50" width="12" height="12"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="12" id="35x-sx-PxT"/>
-                                                        <constraint firstAttribute="height" constant="12" id="sQv-J0-jGC"/>
-                                                    </constraints>
-                                                    <state key="normal" image="info"/>
-                                                    <connections>
-                                                        <action selector="countryDetailsBtn:" destination="r3C-wY-uVP" eventType="touchUpInside" id="gcT-5o-hx3"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qM-ug-Xla">
                                                     <rect key="frame" x="15" y="27" width="0.0" height="38"/>
                                                     <constraints>
@@ -223,25 +212,17 @@
                                                 <constraint firstItem="pmE-dL-RH0" firstAttribute="top" secondItem="qHQ-Be-J5b" secondAttribute="top" constant="12" id="Qwf-mx-MPK"/>
                                                 <constraint firstAttribute="bottom" secondItem="7qM-ug-Xla" secondAttribute="bottom" constant="5" id="WI3-rN-2er"/>
                                                 <constraint firstItem="pmE-dL-RH0" firstAttribute="leading" secondItem="qHQ-Be-J5b" secondAttribute="leading" constant="15" id="a11-Vj-Qqv"/>
-                                                <constraint firstAttribute="trailing" secondItem="SQg-CE-yZe" secondAttribute="trailing" constant="8" id="cov-Jp-Uah"/>
                                                 <constraint firstItem="bbN-wd-wtb" firstAttribute="leading" secondItem="qHQ-Be-J5b" secondAttribute="leading" constant="5" id="g8d-Tb-R3W"/>
                                                 <constraint firstAttribute="trailing" secondItem="bbN-wd-wtb" secondAttribute="trailing" constant="5" id="gGD-zU-DDG"/>
-                                                <constraint firstAttribute="bottom" secondItem="SQg-CE-yZe" secondAttribute="bottom" constant="8" id="kLE-cC-QQA"/>
                                                 <constraint firstItem="6CY-Ly-frG" firstAttribute="centerX" secondItem="qHQ-Be-J5b" secondAttribute="centerX" id="skV-Cz-IVB"/>
                                                 <constraint firstAttribute="bottom" secondItem="bbN-wd-wtb" secondAttribute="bottom" constant="5" id="tQI-Tf-Wrm"/>
                                                 <constraint firstItem="bbN-wd-wtb" firstAttribute="top" secondItem="qHQ-Be-J5b" secondAttribute="top" constant="5" id="vK5-38-IDu"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <constraints>
-<<<<<<< Updated upstream
-                                            <constraint firstAttribute="trailingMargin" secondItem="qHQ-Be-J5b" secondAttribute="trailing" constant="-8" id="LgV-Px-Ja0"/>
-                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="top" secondItem="r3C-wY-uVP" secondAttribute="topMargin" constant="-8" id="TXf-9l-7jd"/>
-                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="leading" secondItem="r3C-wY-uVP" secondAttribute="leadingMargin" constant="-8" id="zh0-n8-Ro3"/>
-=======
-                                            <constraint firstAttribute="trailingMargin" secondItem="qHQ-Be-J5b" secondAttribute="trailing" constant="-8" id="7BU-GJ-jBW"/>
-                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="top" secondItem="r3C-wY-uVP" secondAttribute="topMargin" constant="-8" id="Hzp-ek-l3M"/>
-                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="leading" secondItem="r3C-wY-uVP" secondAttribute="leadingMargin" constant="-8" id="WzM-rg-qPL"/>
->>>>>>> Stashed changes
+                                            <constraint firstAttribute="trailingMargin" secondItem="qHQ-Be-J5b" secondAttribute="trailing" constant="-8" id="lFY-aj-j3v"/>
+                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="top" secondItem="r3C-wY-uVP" secondAttribute="topMargin" constant="-8" id="mQn-Ts-eNM"/>
+                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="leading" secondItem="r3C-wY-uVP" secondAttribute="leadingMargin" constant="-8" id="tJk-8D-uOS"/>
                                         </constraints>
                                         <size key="customSize" width="165" height="70"/>
                                         <connections>
@@ -377,41 +358,15 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lcM-76-0ir">
-                                <rect key="frame" x="16" y="99" width="358" height="745"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="Y5j-Jc-Cnw">
+                                <rect key="frame" x="0.0" y="124" width="390" height="720"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="layoutMargins" id="Y5j-Jc-Cnw">
                                     <size key="itemSize" width="300" height="600"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CountryDetailsCollectionViewCell" id="zDZ-rt-33O">
-                                        <rect key="frame" x="29" y="8" width="300" height="600"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="1cI-i6-0aN">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-<<<<<<< Updated upstream
-=======
-                                        <color key="backgroundColor" red="1" green="0.0" blue="0.99999129769999995" alpha="1" colorSpace="calibratedRGB"/>
->>>>>>> Stashed changes
-                                    </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MapViewCollectionViewCell" id="JtU-6R-EAT" customClass="MapViewCollectionViewCell" customModule="CoronaClass" customModuleProvider="target">
-                                        <rect key="frame" x="29" y="618" width="300" height="65"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Y4v-f2-V6A">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="65"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-<<<<<<< Updated upstream
-                                        <size key="customSize" width="300" height="63"/>
-=======
-                                        <size key="customSize" width="300" height="65"/>
->>>>>>> Stashed changes
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="8"/>
@@ -423,9 +378,9 @@
                         <viewLayoutGuide key="safeArea" id="pmj-D5-5cp"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="0.89803921568627454" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="lcM-76-0ir" firstAttribute="leading" secondItem="pmj-D5-5cp" secondAttribute="leading" constant="16" id="BXP-L4-XRi"/>
-                            <constraint firstItem="pmj-D5-5cp" firstAttribute="trailing" secondItem="lcM-76-0ir" secondAttribute="trailing" constant="16" id="IYB-ba-GFQ"/>
-                            <constraint firstItem="lcM-76-0ir" firstAttribute="top" secondItem="sqH-Cx-cqV" secondAttribute="bottom" constant="-25" id="MmS-Ip-0Cf"/>
+                            <constraint firstItem="lcM-76-0ir" firstAttribute="leading" secondItem="pmj-D5-5cp" secondAttribute="leading" id="BXP-L4-XRi"/>
+                            <constraint firstItem="pmj-D5-5cp" firstAttribute="trailing" secondItem="lcM-76-0ir" secondAttribute="trailing" id="IYB-ba-GFQ"/>
+                            <constraint firstItem="lcM-76-0ir" firstAttribute="top" secondItem="sqH-Cx-cqV" secondAttribute="bottom" id="MmS-Ip-0Cf"/>
                             <constraint firstItem="sqH-Cx-cqV" firstAttribute="leading" secondItem="pmj-D5-5cp" secondAttribute="leading" id="eta-XP-6KA"/>
                             <constraint firstItem="sqH-Cx-cqV" firstAttribute="top" secondItem="5qQ-p4-x4K" secondAttribute="top" id="fQc-rV-tSX"/>
                             <constraint firstAttribute="bottom" secondItem="lcM-76-0ir" secondAttribute="bottom" id="gDB-EA-1a0"/>
@@ -509,7 +464,6 @@
     <resources>
         <image name="Repeat" width="78" height="78"/>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
-        <image name="info" width="12" height="12"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

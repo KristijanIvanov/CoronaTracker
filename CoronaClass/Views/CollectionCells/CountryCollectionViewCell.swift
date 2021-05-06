@@ -11,10 +11,6 @@ protocol CountryCellDelegate: AnyObject {
     func didAddLastCase(_ lastCase: ConfirmedCasesByDay, for country: Country)
 }
 
-protocol CountryCellButtonDelegate: AnyObject {
-    func didClickOnButton(confirmed: ConfirmedCasesByDay, recovered: ConfirmedCasesByDay, deaths: ConfirmedCasesByDay)
-}
-
 class CountryCollectionViewCell: UICollectionViewCell {
     
     //MARK: - UI elements
@@ -32,8 +28,6 @@ class CountryCollectionViewCell: UICollectionViewCell {
     var countryDetailsDeaths: ConfirmedCasesByDay?
     var status = Status(rawValue: "")
     
-    weak var delegateButton: CountryCellButtonDelegate?
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         lblCasesNumber.text = ""
@@ -45,11 +39,6 @@ class CountryCollectionViewCell: UICollectionViewCell {
     @IBAction func retryBtnPressed(_ sender: UIButton) {
         guard let country = country else { return }
         getConfirmedCases(country)
-    }
-    
-    @IBAction func countryDetailsBtn(_ sender: UIButton) {
-        guard let confirmed = countryDetailsConfirmed, let recovered = countryDetailsRecovered, let deaths = countryDetailsDeaths else {return}
-        delegateButton?.didClickOnButton(confirmed: confirmed, recovered: recovered, deaths: deaths)
     }
 }
 
@@ -66,36 +55,6 @@ extension CountryCollectionViewCell {
                     let lastCase = casesByDay[casesByDay.count - 1]//get last one
                     self.delegate?.didAddLastCase(lastCase, for: country)
                     self.configureCell(countryConfirmedCase: lastCase)
-                }
-            }
-        }
-    }
-    
-    private func getRecoveredCases(_ country: Country) {
-        api.request(CountryAPI.getCases(country: country, startDate: Date().minus(days: 1), endDate: Date(), status: .recovered)) { (_ result: Result<[ConfirmedCasesByDay], Error>) in
-            DispatchQueue.main.async {
-                switch result {
-                case .failure(let error):
-                    print(error.localizedDescription)
-                case .success(let casesByDay):
-                    guard casesByDay.count > 0 else { return }
-                    let lastCase = casesByDay[casesByDay.count - 1]//get last one
-                    self.countryDetailsRecovered = lastCase
-                }
-            }
-        }
-    }
-    
-    private func getDeathsCases(_ country: Country) {
-        api.request(CountryAPI.getCases(country: country, startDate: Date().minus(days: 1), endDate: Date(), status: .deaths)) { (_ result: Result<[ConfirmedCasesByDay], Error>) in
-            DispatchQueue.main.async {
-                switch result {
-                case .failure(let error):
-                    print(error.localizedDescription)
-                case .success(let casesByDay):
-                    guard casesByDay.count > 0 else { return }
-                    let lastCase = casesByDay[casesByDay.count - 1]//get last one
-                    self.countryDetailsDeaths = lastCase
                 }
             }
         }
@@ -119,8 +78,6 @@ extension CountryCollectionViewCell {
         retryBtn.isHidden = false
         self.country = country
         lblCountryName.text = country.name
-        getRecoveredCases(country)
-        getDeathsCases(country)
     }
     
     func configureCell(countryConfirmedCase: ConfirmedCasesByDay) {
