@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import MapKit
 import CoreLocation
 
@@ -44,6 +45,9 @@ extension MapViewController: NavigationViewDelegate {
     func addNavigationView() {
         let navigationView = NavigationView(state: .backAndTitle, delegate: self, title: "Country name")
         navigationHolderView.addSubview(navigationView)
+        navigationView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }
 

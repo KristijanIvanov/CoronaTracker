@@ -233,9 +233,15 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <constraints>
+<<<<<<< Updated upstream
                                             <constraint firstAttribute="trailingMargin" secondItem="qHQ-Be-J5b" secondAttribute="trailing" constant="-8" id="LgV-Px-Ja0"/>
                                             <constraint firstItem="qHQ-Be-J5b" firstAttribute="top" secondItem="r3C-wY-uVP" secondAttribute="topMargin" constant="-8" id="TXf-9l-7jd"/>
                                             <constraint firstItem="qHQ-Be-J5b" firstAttribute="leading" secondItem="r3C-wY-uVP" secondAttribute="leadingMargin" constant="-8" id="zh0-n8-Ro3"/>
+=======
+                                            <constraint firstAttribute="trailingMargin" secondItem="qHQ-Be-J5b" secondAttribute="trailing" constant="-8" id="7BU-GJ-jBW"/>
+                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="top" secondItem="r3C-wY-uVP" secondAttribute="topMargin" constant="-8" id="Hzp-ek-l3M"/>
+                                            <constraint firstItem="qHQ-Be-J5b" firstAttribute="leading" secondItem="r3C-wY-uVP" secondAttribute="leadingMargin" constant="-8" id="WzM-rg-qPL"/>
+>>>>>>> Stashed changes
                                         </constraints>
                                         <size key="customSize" width="165" height="70"/>
                                         <connections>
@@ -387,15 +393,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
+<<<<<<< Updated upstream
+=======
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.99999129769999995" alpha="1" colorSpace="calibratedRGB"/>
+>>>>>>> Stashed changes
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Country Map Collection View Cell" id="QKw-fO-Enr" customClass="CountryMapCollectionViewCell" customModule="CoronaClass" customModuleProvider="target">
-                                        <rect key="frame" x="29" y="618" width="300" height="63"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gF7-lM-VEj">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="63"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MapViewCollectionViewCell" id="JtU-6R-EAT" customClass="MapViewCollectionViewCell" customModule="CoronaClass" customModuleProvider="target">
+                                        <rect key="frame" x="29" y="618" width="300" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Y4v-f2-V6A">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
+<<<<<<< Updated upstream
                                         <size key="customSize" width="300" height="63"/>
+=======
+                                        <size key="customSize" width="300" height="65"/>
+>>>>>>> Stashed changes
                                     </collectionViewCell>
                                 </cells>
                                 <userDefinedRuntimeAttributes>
@@ -421,6 +435,7 @@
                     <navigationItem key="navigationItem" id="RYv-na-RKy"/>
                     <connections>
                         <outlet property="collectionView" destination="lcM-76-0ir" id="8Xs-IY-Xsg"/>
+                        <outlet property="flowLayout" destination="Y5j-Jc-Cnw" id="PXy-D0-HlI"/>
                         <outlet property="navigationHolderView" destination="sqH-Cx-cqV" id="bnU-XD-gIq"/>
                         <segue destination="0oI-Sy-sPZ" kind="show" identifier="countryMapSegue" id="kPX-9H-Jhc"/>
                     </connections>

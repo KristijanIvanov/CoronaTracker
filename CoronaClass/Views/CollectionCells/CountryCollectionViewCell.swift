@@ -40,12 +40,7 @@ class CountryCollectionViewCell: UICollectionViewCell {
         lblCountryName.text = ""
         retryBtn.isHidden = true
     }
-    
-    //MARK: - Setup cell's data
-    func setCountryData(_ country: Country) {
-        self.country = country
-        lblCountryName.text = country.name
-    }
+
     //MARK: - IBActions
     @IBAction func retryBtnPressed(_ sender: UIButton) {
         guard let country = country else { return }

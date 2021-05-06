@@ -22,6 +22,10 @@ class CountryDetailsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblRecoveredCase: UILabel!
     @IBOutlet weak var lblDeathsCases: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)

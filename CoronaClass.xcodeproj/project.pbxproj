@@ -38,10 +38,12 @@
 		91BE570E261E24E000FDAB54 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE570D261E24E000FDAB54 /* Country.swift */; };
 		CD47298526399D420061AC2E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CD47298426399D420061AC2E /* Kingfisher */; };
 		CD4729AA26409A1E0061AC2E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4729A926409A1E0061AC2E /* MapViewController.swift */; };
+		CDB29E702642FAA6005DDE55 /* MapViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB29E6E2642FAA6005DDE55 /* MapViewCollectionViewCell.swift */; };
+		CDB29E712642FAA6005DDE55 /* MapViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDB29E6F2642FAA6005DDE55 /* MapViewCollectionViewCell.xib */; };
+		CDB29E7326430314005DDE55 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB29E7226430314005DDE55 /* UIImage.swift */; };
 		CDF17A7A2635F86200C7D23E /* CountryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF17A792635F86200C7D23E /* CountryDetailsViewController.swift */; };
 		CDF17A822636E0C000C7D23E /* CountryDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF17A802636E0C000C7D23E /* CountryDetailsCollectionViewCell.swift */; };
 		CDF17A832636E0C000C7D23E /* CountryDetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDF17A812636E0C000C7D23E /* CountryDetailsCollectionViewCell.xib */; };
-		CDF17A862637179700C7D23E /* CountryMapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF17A852637179700C7D23E /* CountryMapCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,10 +76,12 @@
 		91BE570A261E24B600FDAB54 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		91BE570D261E24E000FDAB54 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		CD4729A926409A1E0061AC2E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		CDB29E6E2642FAA6005DDE55 /* MapViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewCollectionViewCell.swift; sourceTree = "<group>"; };
+		CDB29E6F2642FAA6005DDE55 /* MapViewCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewCollectionViewCell.xib; sourceTree = "<group>"; };
+		CDB29E7226430314005DDE55 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		CDF17A792635F86200C7D23E /* CountryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailsViewController.swift; sourceTree = "<group>"; };
 		CDF17A802636E0C000C7D23E /* CountryDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		CDF17A812636E0C000C7D23E /* CountryDetailsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryDetailsCollectionViewCell.xib; sourceTree = "<group>"; };
-		CDF17A852637179700C7D23E /* CountryMapCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryMapCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +123,8 @@
 				91AA3F7B262612B900A44CE4 /* CountryCollectionViewCell.swift */,
 				CDF17A802636E0C000C7D23E /* CountryDetailsCollectionViewCell.swift */,
 				CDF17A812636E0C000C7D23E /* CountryDetailsCollectionViewCell.xib */,
-				CDF17A852637179700C7D23E /* CountryMapCollectionViewCell.swift */,
+				CDB29E6E2642FAA6005DDE55 /* MapViewCollectionViewCell.swift */,
+				CDB29E6F2642FAA6005DDE55 /* MapViewCollectionViewCell.xib */,
 			);
 			path = CollectionCells;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 				91AA3F75262603E800A44CE4 /* Int64Extensions.swift */,
 				9193FE12262765B9006E8D86 /* Date.swift */,
 				9193FE0F2627560C006E8D86 /* DateFormatter+.swift */,
+				CDB29E7226430314005DDE55 /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -284,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				91BE56E3261E121C00FDAB54 /* LaunchScreen.storyboard in Resources */,
+				CDB29E712642FAA6005DDE55 /* MapViewCollectionViewCell.xib in Resources */,
 				91BE56E0261E121C00FDAB54 /* Assets.xcassets in Resources */,
 				CDF17A832636E0C000C7D23E /* CountryDetailsCollectionViewCell.xib in Resources */,
 				91BE56DE261E121C00FDAB54 /* Main.storyboard in Resources */,
@@ -307,7 +314,6 @@
 				CDF17A822636E0C000C7D23E /* CountryDetailsCollectionViewCell.swift in Sources */,
 				9193FE102627560C006E8D86 /* DateFormatter+.swift in Sources */,
 				9193FE13262765B9006E8D86 /* Date.swift in Sources */,
-				CDF17A862637179700C7D23E /* CountryMapCollectionViewCell.swift in Sources */,
 				91BE56FE261E1FF800FDAB54 /* UIColor.swift in Sources */,
 				91BE56D9261E121C00FDAB54 /* SceneDelegate.swift in Sources */,
 				916FCBD72620C9F000880D1F /* DisplayHudProtocol.swift in Sources */,
@@ -315,6 +321,8 @@
 				9193FE072627507B006E8D86 /* Alertable.swift in Sources */,
 				91BE56FB261E168300FDAB54 /* NavigationView.swift in Sources */,
 				9169566A262E03B500C8812B /* GlobalAPI.swift in Sources */,
+				CDB29E702642FAA6005DDE55 /* MapViewCollectionViewCell.swift in Sources */,
+				CDB29E7326430314005DDE55 /* UIImage.swift in Sources */,
 				9193FE0A26275194006E8D86 /* UIAlertController+Extensions.swift in Sources */,
 				91BE570E261E24E000FDAB54 /* Country.swift in Sources */,
 				91BE56F1261E134C00FDAB54 /* HomeViewController.swift in Sources */,
