@@ -50,7 +50,7 @@ class CountryDetailsCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(confirmed: ConfirmedCasesByDay, recovered: ConfirmedCasesByDay, deaths: ConfirmedCasesByDay) {
-       lblConfirmeCases.text = "\(confirmed.cases.getFormattedNumber())"
+        lblConfirmeCases.text = "\(confirmed.cases.getFormattedNumber())"
         lblRecoveredCase.text = "\(recovered.cases.getFormattedNumber())"
         lblDeathsCases.text = "\(deaths.cases.getFormattedNumber())"
     }

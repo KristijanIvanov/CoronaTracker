@@ -154,6 +154,7 @@ extension CountryDetailsViewController {
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
+                self.dispatchGroup.leave()
             case .success(let casesByDay):
                 guard casesByDay.count > 0 else { return }
                 let lastCase = casesByDay[casesByDay.count - 1]
